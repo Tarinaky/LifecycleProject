@@ -13,6 +13,8 @@ class ArrayList<Monster>{}
 
 /**
  * @composed 1 - * Monster
+ * @note accountNames should be unique, but can be changed (as primaryKey is used to persist relationships).
+ * @note checkPassword returns true iff the argument matches the password stored in the instance.
 */
 class UserAccount {
 	private long primaryKey;
@@ -25,6 +27,7 @@ class UserAccount {
 }
 /**
  * @composed 1 - * UserAccount
+ * @note TableOfUserAccounts is used to resolve user account names to UserAccount instances.
 */
 class TableOfUserAccounts {
 	private HashMap accounts;
@@ -32,6 +35,10 @@ class TableOfUserAccounts {
 	public UserAccount lookup(string accountName){}
 }
 
+/**
+ * @note owner is a handle back to the monster's current owner.
+ * @note Unlike UserAccounts, monsters do not need unique names.
+*/
 class Monster {
 	private long primaryKey;
 	private UserAccount owner;
