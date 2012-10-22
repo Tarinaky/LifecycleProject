@@ -18,7 +18,7 @@ class ArrayList<Monster>{}
 */
 class UserAccount {
 	private long primaryKey;
-	private string accountName;
+	private string email;
 	
 	private string password;
 	private ArrayList<Monster> listOfMonsters;
@@ -32,7 +32,8 @@ class UserAccount {
 class TableOfUserAccounts {
 	private HashMap accounts;
 
-	public UserAccount lookup(string accountName){}
+	public UserAccount lookup(string email){}
+	public UserAccount addUser(string email){}
 }
 
 /**
