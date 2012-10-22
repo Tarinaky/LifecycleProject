@@ -2,6 +2,7 @@ package uk.ac.aber.dcs.cs221.monstermash.data;
 
 import static org.junit.Assert.*;
 
+import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -41,6 +42,27 @@ public class TableOfAccountsTest {
 	public void testChangeEmail() {
 		accounts.addUser("testChangeEmail@test.com").setEmail("testChangedEmail2@test.com");
 		assertTrue(accounts.lookup("testChangedEmail2@test.com") != null);
+	}
+	
+	@Test
+	public void testBuildJSON() throws JSONException {
+		String data = accounts.buildJSON().toString(4);
+		System.out.println(data);
+	}
+	
+	@Test
+	public void testReadJSON() throws JSONException {
+		String data = "{" +
+				"\"nextAccountKey\": 10, " +
+				"\"users\": [" +
+				"	{ " +
+				"	\"email\": \"barry@hotmail.com\", " +
+				"	\"password\": \"kargoth\", " +
+				"	\"primaryKey\": 1" +
+				"	}] " +
+				"}";
+		TableOfAccounts loaded = new TableOfAccounts().readJSON(data);
+		assertTrue(loaded.lookup("barry@hotmail.com").checkPassword("kargoth"));
 	}
 
 }

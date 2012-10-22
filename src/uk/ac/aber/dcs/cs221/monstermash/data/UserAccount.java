@@ -2,9 +2,10 @@ package uk.ac.aber.dcs.cs221.monstermash.data;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UserAccount extends java.util.Observable {
-	static long nextAccountKey = 1;
-	
 	private long primaryKey;
 	private String email;
 	
@@ -12,11 +13,12 @@ public class UserAccount extends java.util.Observable {
 	private ArrayList<Object> listOfMonsters;
 		
 	public boolean checkPassword(String password){
-		return (this.password == password);
+		if (this.password == null) { return false; } // Account locked.
+		return (this.password.equals(password) );
 	}
 	
-	public UserAccount() {
-		primaryKey = nextAccountKey++; // Assign next key and increment.
+	public UserAccount(long primaryKey) {
+		this.primaryKey = primaryKey; // Assign next key and increment.
 	}
 	
 	public UserAccount setEmail(String email) {
@@ -32,6 +34,22 @@ public class UserAccount extends java.util.Observable {
 	public UserAccount setPassword(String password) {
 		this.password = password;
 		return this;
+	}
+
+	public JSONObject buildJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+		json.put("primaryKey", primaryKey);
+		json.put("email", email);
+		json.put("password", password);
+		
+		return json;
+	}
+
+	public void readJSON(JSONObject json) throws JSONException {
+		primaryKey = json.getLong("primaryKey");
+		email = json.getString("email");
+		password = json.getString("password");
+		
 	}
 }
 
