@@ -9,6 +9,10 @@ public class TableOfAccounts implements Observer {
 	
 	private HashMap<String,UserAccount> accounts;
 
+	TableOfAccounts() {
+		accounts = new HashMap<String,UserAccount>();
+	}
+	
 	public UserAccount lookup(String email){
 		return accounts.get(email);
 	}
