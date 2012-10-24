@@ -13,32 +13,42 @@ class ArrayList<Monster>{}
 
 /**
  * @composed 1 - * Monster
- * @note accountNames should be unique, but can be changed (as primaryKey is used to persist relationships).
- * @note checkPassword returns true iff the argument matches the password stored in the instance.
 */
-class UserAccount {
+class UserAccount extends java.util.Observable {
 	private long primaryKey;
 	private string email;
 	
 	private string password;
 	private ArrayList<Monster> listOfMonsters;
 		
+	public UserAccount(long primaryKey){}
+	
 	public boolean checkPassword(string password){}
+	public UserAccount setPassword(String password){}
+	
+	public UserAccount setEmail(String email){}
+	public String getEmail(){}
+	
+	public JSONObject buildJSON(){}
+	public UserAccount readJSON(){}
 }
 /**
  * @composed 1 - * UserAccount
- * @note TableOfUserAccounts is used to resolve user account names to UserAccount instances.
 */
-class TableOfUserAccounts {
+class TableOfAccounts implements java.util.Observer {
+	private long nextAccountKey;
 	private HashMap accounts;
 
+	public TableOfAccounts(){}
+		
 	public UserAccount lookup(string email){}
 	public UserAccount addUser(string email){}
+	
+	public JSONObject buildJSON(){}
+	public TableOfAccounts readJSON(String expression){}
 }
 
 /**
- * @note owner is a handle back to the monster's current owner.
- * @note Unlike UserAccounts, monsters do not need unique names.
 */
 class Monster {
 	private long primaryKey;
