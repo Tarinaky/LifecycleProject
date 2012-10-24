@@ -83,10 +83,11 @@ public class UserAccount extends java.util.Observable {
 	 * @param json A valid JSON object.
 	 * @throws JSONException
 	 */
-	public void readJSON(JSONObject json) throws JSONException {
+	public UserAccount readJSON(JSONObject json) throws JSONException {
 		primaryKey = json.getLong("primaryKey");
 		email = json.getString("email");
 		password = json.getString("password");
+		return this;
 		
 	}
 }
