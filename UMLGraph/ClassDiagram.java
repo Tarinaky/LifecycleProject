@@ -49,19 +49,64 @@ class TableOfAccounts implements java.util.Observer {
 }
 
 /**
-*/
+  * @note 'Amplitude' is the value of an attribute at its peak. A 'Lambda', or time-coefficient,
+  governs the rate of change in an exponential function - it is called lambda by analogy to 
+  physical processes with exponential functions (ie Radioactive Decay). The former is assigned on 
+  a per-attribute basis (i.e. a seperate gene for each attribute's Amplitude). The latter appears 
+  to be global for all attributes - using a single 'age_rate' double. Also note that 'Amplitudes' 
+  are integer values, while 'Lambdas' are rational (a smaller fraction indicates a slower aging 
+  process - greater than 1 and the creature has the life-expectancy of a mayfly).
+
+  * @note getHealth returns the Monster's health at the instant it is called. A creature whose 
+  instantaneous health is greater than 0 is 'alive' and may perform actions. A creature whose 
+  instantaneous health is less than or equal to 0 has died of natural causes. A creature's health 
+  at any instant is given by 2-e^(\lambda t). \lambda is the coefficient of decay, a smaller 
+  (fractional) value indicates that the creature will age more slowly. t is the time in days. 
+  The natural lifespan of a creature should be given by y = e^(2/x). A creature's Health can be 
+  reduced by Injuries - bringing about an earlier demise.
+
+  @note Strength, Evasion and Toughness are calculated from an 'Amplitude' coefficient (determining 
+  their peak value) and a 'Lambda' time coefficient determining the time it takes to reach that peak, 
+  and how fast the creature 'decays' from that peak. The amplitude is called 'a' and the time coefficient 
+  is called 'lambda'. These three attributes are given by a[e^(\lambda t)-1][2-e^(\lambda t)]. Noting that 
+  \lambda is the age_rate field and a is the 'Amplitude' for that characteristic.
+
+  @note Appendix A of the Requirements Specification includes the functions dealing with reproduction and 
+  fertility - they are not reproduced here for space concerns.
+ */
 class Monster {
 	private long primaryKey;
 	private UserAccount owner;
 	
 	private string monsterName;
 	private boolean gender;
-	private int health;
 	private java.util.Date dateOfBirth;
 
-	private int strength;
+	protected double age_rate;
+	
+	protected int strength_amplitude;
+
+	protected int evade_amplitude;
+
+	protected int fertility;
+
+	protected double injuryChance;
+	protected int injuries;
+
+	protected int toughness_amplitude;
+
+	public double getHealth();
+	public int getStrength();
+	public int getEvade();
+	public double getFertility();
+	public double getInjuryChance();
+	public void injure();
+	public void kill();
+	public int getMaxHP();
+
+
 }
 	
-	
+
 	
 
