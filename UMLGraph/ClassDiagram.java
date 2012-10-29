@@ -62,7 +62,7 @@ class TableOfAccounts implements java.util.Observer {
   instantaneous health is less than or equal to 0 has died of natural causes. A creature's health 
   at any instant is given by 2-e^(\lambda t). \lambda is the coefficient of decay, a smaller 
   (fractional) value indicates that the creature will age more slowly. t is the time in days. 
-  The natural lifespan of a creature should be given by y = e^(2/x). A creature's Health can be 
+  The natural lifespan of a creature should be given by t = ln(2)/\lambda. A creature's Health can be 
   reduced by Injuries - bringing about an earlier demise.
 
   @note Strength, Evasion and Toughness are calculated from an 'Amplitude' coefficient (determining 
