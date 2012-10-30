@@ -15,7 +15,7 @@ import org.json.JSONException;
  *
  */
 public class TableOfAccounts implements Observer {
-	private long nextAccountKey;
+	private volatile long nextAccountKey;
 	
 	
 	private HashMap<String,UserAccount> accounts;
@@ -30,7 +30,7 @@ public class TableOfAccounts implements Observer {
 	 * @param email The email address to look up.
 	 * @return The UserAccount if it exists or null if there is no such account.
 	 */
-	public UserAccount lookup(String email){
+	public synchronized UserAccount lookup(String email){
 		return accounts.get(email);
 	}
 	
@@ -39,7 +39,7 @@ public class TableOfAccounts implements Observer {
 	 * @param email The email address to associate with the UserAccount.
 	 * @return The new UserAccount or null if the email address is already in use.
 	 */
-	public UserAccount addUser(String email){
+	public synchronized UserAccount addUser(String email){
 		if (accounts.containsKey(email) ) {
 			return null;//Duplicate username.
 		}
@@ -52,7 +52,7 @@ public class TableOfAccounts implements Observer {
 	}
 	
 	@Override
-	public void update(Observable user, Object oldemail) {
+	public synchronized void update(Observable user, Object oldemail) {
 		accounts.remove(oldemail);
 		accounts.put(((UserAccount) user).getEmail(), (UserAccount)user);
 	}
@@ -62,7 +62,7 @@ public class TableOfAccounts implements Observer {
 	 * @return
 	 * @throws JSONException
 	 */
-	public org.json.JSONObject buildJSON() throws JSONException {
+	public synchronized org.json.JSONObject buildJSON() throws JSONException {
 		org.json.JSONObject json = new org.json.JSONObject();
 		//Fields
 		json.put("nextAccountKey", nextAccountKey);
@@ -83,7 +83,7 @@ public class TableOfAccounts implements Observer {
 	 * @return The deserialised object.
 	 * @throws JSONException
 	 */
-	public TableOfAccounts readJSON(String expression) throws JSONException {
+	public synchronized TableOfAccounts readJSON(String expression) throws JSONException {
 		org.json.JSONObject json = new org.json.JSONObject(expression);
 		
 		//Load primary key gen

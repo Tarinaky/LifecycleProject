@@ -11,7 +11,7 @@ import org.json.JSONObject;
  *
  */
 public class UserAccount extends java.util.Observable {
-	private long primaryKey;
+	private volatile long primaryKey;
 	private String email;
 	
 	private String password;
@@ -40,7 +40,7 @@ public class UserAccount extends java.util.Observable {
 	 * @param email The user's new email address.
 	 * @return This UserAccount object.
 	 */
-	public UserAccount setEmail(String email) {
+	public synchronized UserAccount setEmail(String email) {
 		String oldemail = this.email;
 		this.email = email;
 		setChanged();
@@ -69,7 +69,7 @@ public class UserAccount extends java.util.Observable {
 	 * @return
 	 * @throws JSONException
 	 */
-	public JSONObject buildJSON() throws JSONException {
+	public synchronized JSONObject buildJSON() throws JSONException {
 		JSONObject json = new JSONObject();
 		json.put("primaryKey", primaryKey);
 		json.put("email", email);
@@ -83,7 +83,7 @@ public class UserAccount extends java.util.Observable {
 	 * @param json A valid JSON object.
 	 * @throws JSONException
 	 */
-	public UserAccount readJSON(JSONObject json) throws JSONException {
+	public synchronized UserAccount readJSON(JSONObject json) throws JSONException {
 		primaryKey = json.getLong("primaryKey");
 		email = json.getString("email");
 		password = json.getString("password");
