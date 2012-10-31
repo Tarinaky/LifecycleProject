@@ -18,7 +18,7 @@ public class TableOfAccounts implements Observer {
 	private volatile long nextAccountKey;
 	
 	
-	private HashMap<String,UserAccount> accounts;
+	private volatile HashMap<String,UserAccount> accounts;
 
 	public TableOfAccounts() {
 		nextAccountKey = 1;

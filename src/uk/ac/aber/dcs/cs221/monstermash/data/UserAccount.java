@@ -12,10 +12,10 @@ import org.json.JSONObject;
  */
 public class UserAccount extends java.util.Observable {
 	private volatile long primaryKey;
-	private String email;
+	private volatile String email;
 	
-	private String password;
-	private ArrayList<Object> listOfMonsters;
+	private volatile String password;
+	private volatile ArrayList<Object> listOfMonsters;
 		
 	/**
 	 * Compare a given string with the password on file.
