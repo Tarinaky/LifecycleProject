@@ -3,6 +3,7 @@ package uk.ac.aber.dcs.cs221.monstermash.data;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.TreeSet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +18,7 @@ public class UserAccount extends java.util.Observable {
 	private volatile String email;
 	
 	private volatile String password;
-	private volatile ArrayList<Monster> listOfMonsters;
+	private volatile TreeSet<Monster> monsters;
 		
 	/**
 	 * Compare a given string with the password on file.
@@ -38,7 +39,7 @@ public class UserAccount extends java.util.Observable {
 	public UserAccount(long primaryKey) {
 		this.primaryKey = primaryKey;
 		
-		this.listOfMonsters = new ArrayList<Monster>();
+		this.monsters = new TreeSet<Monster>();
 	}
 	
 	/**
@@ -102,7 +103,7 @@ public class UserAccount extends java.util.Observable {
 	 * @param monster The monster to associate with this UserAccount.
 	 */
 	public synchronized void addMonster(Monster monster) {
-		this.listOfMonsters.add(monster);
+		this.monsters.add(monster);
 	}
 	
 	/**
@@ -110,7 +111,7 @@ public class UserAccount extends java.util.Observable {
 	 * @param monster The monster to remove from this UserAccount.
 	 */
 	public synchronized void removeMonster(Monster monster) {
-		this.listOfMonsters.remove(monster);
+		this.monsters.remove(monster);
 	}
 }
 

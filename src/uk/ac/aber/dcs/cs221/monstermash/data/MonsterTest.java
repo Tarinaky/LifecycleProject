@@ -67,8 +67,8 @@ public class MonsterTest extends TestCase {
 
 	@Test
 	public void testBreed() {
-		Monster mother = Monster.generateRandom();
-		Monster father = Monster.generateRandom();
+		Monster mother = Monster.generateRandom().setOwner(new UserAccount(1) );
+		Monster father = Monster.generateRandom().setOwner(new UserAccount(2) );
 		
 		ArrayList<Monster> children = mother.breed(father);
 		assertTrue(children != null);

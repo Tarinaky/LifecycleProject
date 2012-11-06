@@ -12,7 +12,7 @@ import uk.ac.aber.dcs.cs221.monstermash.util.Name;
  * @author Jacob Smith, jas32
  *
  */
-public class Monster {
+public class Monster implements Comparable<Monster> {
 	public static final int MAX_NUM_CHILDREN = 10;
 	
 	private static volatile long nextPrimaryKey = 1;
@@ -250,8 +250,19 @@ public class Monster {
 	 */
 	public synchronized void reap() {
 		this.owner.removeMonster(this);
-		
 	}
+	
+	@Override
+	public int compareTo(Monster arg0) {
+		long difference = this.getUID() - arg0.getUID();
+		if (difference > 0) {
+			return 1;
+		}
+		if (difference < 0) {
+			return -1;
+		}
+		return 0;
+	}		
 	
 
 }
