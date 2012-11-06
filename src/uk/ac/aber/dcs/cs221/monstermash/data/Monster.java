@@ -2,6 +2,8 @@ package uk.ac.aber.dcs.cs221.monstermash.data;
 
 import java.util.Date;
 
+import uk.ac.aber.dcs.cs221.monstermash.util.Name;
+
 /**
  * 
  * @author Jacob Smith, jas32
@@ -28,6 +30,8 @@ public class Monster {
 	protected volatile int fertility;
 	protected volatile double injuryChance;
 	
+	protected static Name nameGen;
+	
 	private volatile int injuries;
 	
 	/**
@@ -38,7 +42,8 @@ public class Monster {
 	 */
 	public Monster() {
 		synchronized (getClass() ) {
-			primaryKey = nextPrimaryKey++;	
+			primaryKey = nextPrimaryKey++;
+			if (nameGen == null) { nameGen = new Name(); }
 		}
 		
 		dateOfBirth = new Date();
