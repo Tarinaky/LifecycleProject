@@ -11,7 +11,7 @@ import uk.ac.aber.dcs.cs221.monstermash.util.Name;
  *
  */
 public class Monster {
-	public static final int MAX_NUM_CHILDREN = 4;
+	public static final int MAX_NUM_CHILDREN = 10;
 	
 	private static volatile long nextPrimaryKey = 1;
 	
@@ -133,7 +133,7 @@ public class Monster {
 	
 	/**
 	 * 
-	 * @return A binomial distribution on the interval (0,1)
+	 * @return A random number with a binomial distribution on the interval (0,1)
 	 */
 	public static double mutation(java.util.Random rand) {
 		final int ITERATIONS = 3;
@@ -147,7 +147,7 @@ public class Monster {
 				count += (stream & mask)!=0 ? 1: 0; 
 			}
 		}
-		return count / (WORDLENGTH*ITERATIONS);
+		return (double)(count) / (WORDLENGTH*ITERATIONS);
 	}
 	
 	public static Monster generateRandom() {
@@ -163,7 +163,7 @@ public class Monster {
 		monster.toughnessCoefficient = (int) (mutation(rand) * 50);
 		monster.evadeCoefficient = (int) (mutation(rand) * 50);
 		
-		monster.fertility =  mutation(rand);
+		monster.fertility =  rand.nextDouble();
 		monster.injuryChance = (int) (mutation(rand) * 20);
 		
 		return monster;
@@ -176,7 +176,7 @@ public static double crossover (java.util.Random rand, double a, double b) {
 	
 	public ArrayList<Monster> breed (Monster father) {
 		java.util.Random rand = new java.util.Random(); 
-		int numChildren = (int) Math.sqrt(this.fertility * father.fertility) * MAX_NUM_CHILDREN;
+		int numChildren = (int) (Math.sqrt(this.fertility * father.fertility) * MAX_NUM_CHILDREN);
 		ArrayList<Monster> returnedChildren = new ArrayList<Monster>(numChildren);
 		
 		while (returnedChildren.size() < numChildren) {
