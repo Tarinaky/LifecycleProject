@@ -17,12 +17,13 @@ import org.json.JSONException;
 public class TableOfAccounts implements Observer {
 	private volatile long nextAccountKey;
 	
-	
-	private volatile HashMap<String,UserAccount> accounts;
+	private volatile HashMap<String,UserAccount> accountsByEmail;
+	private volatile HashMap<Long,UserAccount> accountsByUID;
 
 	public TableOfAccounts() {
 		nextAccountKey = 1;
-		accounts = new HashMap<String,UserAccount>();
+		accountsByEmail = new HashMap<String,UserAccount>();
+		accountsByUID = new HashMap<Long,UserAccount>();
 	}
 	
 	/**
@@ -31,7 +32,10 @@ public class TableOfAccounts implements Observer {
 	 * @return The UserAccount if it exists or null if there is no such account.
 	 */
 	public synchronized UserAccount lookup(String email){
-		return accounts.get(email);
+		return accountsByEmail.get(email);
+	}
+	public synchronized UserAccount lookup(long uid){
+		return accountsByUID.get(uid);
 	}
 	
 	/**
@@ -40,21 +44,22 @@ public class TableOfAccounts implements Observer {
 	 * @return The new UserAccount or null if the email address is already in use.
 	 */
 	public synchronized UserAccount addUser(String email){
-		if (accounts.containsKey(email) ) {
+		if (accountsByEmail.containsKey(email) ) {
 			return null;//Duplicate username.
 		}
 		
 		UserAccount user = new UserAccount(nextAccountKey++);
 		user.setEmail(email);
-		accounts.put(email, user);
+		accountsByEmail.put(email, user);
+		accountsByUID.put(user.getUID(), user);
 		user.addObserver(this);
 		return user;
 	}
 	
 	@Override
 	public synchronized void update(Observable user, Object oldemail) {
-		accounts.remove(oldemail);
-		accounts.put(((UserAccount) user).getEmail(), (UserAccount)user);
+		accountsByEmail.remove(oldemail);
+		accountsByEmail.put(((UserAccount) user).getEmail(), (UserAccount)user);
 	}
 	
 	/**
@@ -68,7 +73,7 @@ public class TableOfAccounts implements Observer {
 		json.put("nextAccountKey", nextAccountKey);
 		
 		//List of users
-		for (UserAccount account: accounts.values()) {
+		for (UserAccount account: accountsByEmail.values()) {
 			json.append("users",account.buildJSON() );
 		}
 		
@@ -94,7 +99,8 @@ public class TableOfAccounts implements Observer {
 		for (int i = 0; i < array.length(); ++i) {
 			UserAccount account = new UserAccount(0);
 			account.readJSON(array.getJSONObject(i));
-			accounts.put(account.getEmail(), account);
+			accountsByEmail.put(account.getEmail(), account);
+			accountsByUID.put(account.getUID(), account);
 			account.addObserver(this);
 		}
 		
@@ -102,6 +108,6 @@ public class TableOfAccounts implements Observer {
 		return this;
 	}
 	
-	
+
 	
 }

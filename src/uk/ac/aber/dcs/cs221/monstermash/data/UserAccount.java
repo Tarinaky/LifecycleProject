@@ -25,6 +25,9 @@ public class UserAccount extends java.util.Observable {
 	 * @param password The string to check.
 	 * @return True iff this is the correct password for this user.
 	 */
+	
+	public long getUID() { return primaryKey; }
+	
 	public boolean checkPassword(String check){
 		String password = this.password;//Copy value to ensure value will not change due
 		//to interleaving.

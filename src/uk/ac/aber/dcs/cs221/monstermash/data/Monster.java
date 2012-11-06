@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import uk.ac.aber.dcs.cs221.monstermash.util.Name;
 
@@ -56,6 +59,21 @@ public class Monster implements Comparable<Monster> {
 		dateOfBirth = new Date();
 		
 		injuries = 0;
+	}
+	/**
+	 * Construct an uninitialise Monster with a particular primaryKey.
+	 * @param primaryKey
+	 */
+	protected Monster(long primaryKey) {
+		this.primaryKey = primaryKey;
+		
+		synchronized(getClass() ) {
+			// Infer what the next PrimaryKey should be.
+			if (primaryKey >= nextPrimaryKey) {
+				nextPrimaryKey = primaryKey + 1;
+			} 
+			
+		}
 	}
 	
 	/**
@@ -264,5 +282,43 @@ public class Monster implements Comparable<Monster> {
 		return 0;
 	}		
 	
+	public synchronized JSONObject buildJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+		
+		json.put("ageRate", ageRate);
+		json.put("dateOfBirth", dateOfBirth.getTime() );
+		json.put("evade", evadeCoefficient);
+		json.put("fertility", fertility);
+		json.put("gender", (isMale() ) ? "male": "female" );
+		json.put("injuries", injuries);
+		json.put("injuryChance", injuryChance);
+		json.put("name", name);
+		json.put("owner", owner.getUID() );
+		json.put("strength", strengthCoefficient);
+		json.put("toughness", toughnessCoefficient);		
+		json.put("primaryKey", getUID() );
+		
+		return json;
+	}
+	
+	public static Monster readJSON(TableOfAccounts accounts, JSONObject json) throws JSONException {
+		long primaryKey = json.getLong("primaryKey");
+		Monster monster = new Monster(primaryKey);
+		
+		monster.ageRate = json.getDouble("ageRate");
+		monster.dateOfBirth = new Date(json.getLong("dateOfBirth") );
+		monster.evadeCoefficient = json.getInt("evade");
+		monster.fertility = json.getDouble("fertility");
+		monster.gender = (json.getString("gender").equals("male")) ? Gender.MALE: Gender.FEMALE;
+		monster.injuries = json.getInt("injuries");
+		monster.injuryChance = json.getInt("injuryChance");
+		monster.name = json.getString("name");
+		monster.setOwner(accounts.lookup(json.getLong("owner") ) );
+		monster.strengthCoefficient = json.getInt("strength");
+		monster.toughnessCoefficient = json.getInt("toughness");
+		
+		return monster;
+		
+	}
 
 }

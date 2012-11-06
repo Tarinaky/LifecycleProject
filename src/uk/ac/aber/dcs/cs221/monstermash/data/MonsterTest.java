@@ -3,6 +3,8 @@ package uk.ac.aber.dcs.cs221.monstermash.data;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,19 +62,25 @@ public class MonsterTest extends TestCase {
 	}
 
 	@Test
-	public void testGenerateRandom() {
-		Monster monster = Monster.generateRandom();
-		System.out.println(monster);
+	public void testGenerateRandom() throws JSONException {
+		Monster monster = Monster.generateRandom().setOwner(new UserAccount(1));
+		System.out.println("Starter Monster: "+monster.buildJSON().toString() );
 	}
 
 	@Test
-	public void testBreed() {
+	public void testBreed() throws JSONException {
 		Monster mother = Monster.generateRandom().setOwner(new UserAccount(1) );
 		Monster father = Monster.generateRandom().setOwner(new UserAccount(2) );
 		
 		ArrayList<Monster> children = mother.breed(father);
 		assertTrue(children != null);
-		System.out.println("Breeding output: "+children);
+		
+		JSONArray json = new JSONArray();
+		for (Monster child: children) {
+			json.put(child.buildJSON() );
+		}
+		
+		System.out.println("Offspring: "+json.toString() );
 	}
 
 }
