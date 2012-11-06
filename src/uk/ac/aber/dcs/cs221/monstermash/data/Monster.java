@@ -105,7 +105,11 @@ public class Monster {
 	 * 
 	 * @return The monster's age in seconds.
 	 */
-	public long getAge() { return dateOfBirth.getTime(); }
+	public long getAge() {
+		long instantOfBirth = dateOfBirth.getTime();
+		long currentInstant = new Date().getTime();
+		return currentInstant - instantOfBirth;
+	}
 	/**
 	 * 
 	 * @return The monster's health, less than 1. If less than 0 this indicates the monster should be reaped.
