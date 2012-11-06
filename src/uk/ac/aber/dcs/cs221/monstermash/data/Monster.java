@@ -1,5 +1,6 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import uk.ac.aber.dcs.cs221.monstermash.util.Name;
@@ -10,6 +11,8 @@ import uk.ac.aber.dcs.cs221.monstermash.util.Name;
  *
  */
 public class Monster {
+	public static final int MAX_NUM_CHILDREN = 4;
+	
 	private static volatile long nextPrimaryKey = 1;
 	
 	private volatile long primaryKey;
@@ -27,7 +30,9 @@ public class Monster {
 	protected volatile int evadeCoefficient;
 	protected volatile int toughnessCoefficient;
 	
-	protected volatile int fertility;
+	protected volatile double fertility;
+	
+	
 	protected volatile int injuryChance;
 	
 	protected static Name nameGen;
@@ -126,6 +131,25 @@ public class Monster {
 		return (int) (toughnessCoefficient*(Math.exp(ageRate * getAge() ) - 1) * getHealth() );
 	}
 	
+	/**
+	 * 
+	 * @return A binomial distribution on the interval (0,1)
+	 */
+	public static double mutation(java.util.Random rand) {
+		final int ITERATIONS = 3;
+		final int WORDLENGTH = 31;
+		
+		int count = 0;
+		
+		for (int i = 0; i < ITERATIONS; ++i) {
+			int stream = rand.nextInt();
+			for (int mask = 1; mask >0; mask *= 2) {
+				count += (stream & mask)!=0 ? 1: 0; 
+			}
+		}
+		return count / (WORDLENGTH*ITERATIONS);
+	}
+	
 	public static Monster generateRandom() {
 		Monster monster = new Monster();
 		java.util.Random rand = new java.util.Random();
@@ -134,15 +158,56 @@ public class Monster {
 		
 		synchronized(nameGen) { monster.setName((monster.isMale() ) ? nameGen.male(): nameGen.female() ); }
 		
-		monster.ageRate = rand.nextGaussian() * 1e-6f;
-		monster.strengthCoefficient = (int) (rand.nextGaussian() * 50);
-		monster.toughnessCoefficient = (int) (rand.nextGaussian() * 50);
-		monster.evadeCoefficient = (int) (rand.nextGaussian() * 50);
+		monster.ageRate = mutation(rand) * 1e-6f;
+		monster.strengthCoefficient = (int) (mutation(rand) * 50);
+		monster.toughnessCoefficient = (int) (mutation(rand) * 50);
+		monster.evadeCoefficient = (int) (mutation(rand) * 50);
 		
-		monster.fertility =  (int) (rand.nextGaussian() * 3);
-		monster.injuryChance = (int) (rand.nextGaussian() * 50);
+		monster.fertility =  mutation(rand);
+		monster.injuryChance = (int) (mutation(rand) * 20);
 		
 		return monster;
+		
+	}
+	
+public static double crossover (java.util.Random rand, double a, double b) {
+	return (rand.nextBoolean() ) ? a: b;
+}
+	
+	public ArrayList<Monster> breed (Monster father) {
+		java.util.Random rand = new java.util.Random(); 
+		int numChildren = (int) Math.sqrt(this.fertility * father.fertility) * MAX_NUM_CHILDREN;
+		ArrayList<Monster> returnedChildren = new ArrayList<Monster>(numChildren);
+		
+		while (returnedChildren.size() < numChildren) {
+			Monster monster = new Monster();
+			
+			monster.setGender((rand.nextBoolean()) ? Gender.MALE: Gender.FEMALE);
+			synchronized(nameGen) { monster.setName((monster.isMale() ) ? nameGen.male(): nameGen.female() ); }
+			monster.setOwner(this.getOwner() );
+			
+			monster.ageRate = crossover(rand, this.ageRate, father.ageRate);
+			monster.ageRate *= mutation(rand) + 0.5;
+			
+			monster.strengthCoefficient = (int) crossover(rand, this.strengthCoefficient, father.strengthCoefficient);
+			monster.strengthCoefficient *= mutation(rand) + 0.5;
+			
+			monster.evadeCoefficient = (int) crossover(rand, this.evadeCoefficient, father.evadeCoefficient);
+			monster.evadeCoefficient *= mutation(rand) + 0.5;
+			
+			monster.toughnessCoefficient = (int) crossover(rand, this.toughnessCoefficient, father.toughnessCoefficient);
+			monster.toughnessCoefficient *= mutation(rand) + 0.5;
+			
+			monster.fertility = crossover(rand, this.fertility, father.fertility);
+			monster.fertility *= mutation(rand) + 0.5;
+			
+			monster.injuryChance = (int) crossover(rand, this.injuryChance, father.injuryChance);
+			monster.injuryChance *= mutation(rand) + 0.5;
+			
+			returnedChildren.add(monster);
+		}
+		
+		return returnedChildren;
 		
 	}
 	
