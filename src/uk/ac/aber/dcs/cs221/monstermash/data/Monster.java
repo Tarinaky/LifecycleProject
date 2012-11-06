@@ -87,11 +87,15 @@ public class Monster {
 	public String getName() { return name; }
 	
 	/**
-	 * @see Gender
+	 * Sets the monster's gender and immediately gives the monster a random
+	 * gender appropriate name. @see Gender.
 	 * @param gender The monster's gender.
 	 * @return This monster object.
 	 */
-	public synchronized Monster setGender(Gender gender) { this.gender = gender; return this; }
+	public synchronized Monster setGender(Gender gender) {
+		this.gender = gender; 
+		this.setName((this.isMale() ) ? nameGen.male(new java.util.Random() ): nameGen.female(new java.util.Random() ) );
+		return this; }
 	/**
 	 * 
  	 * @return True iff this monster is male.
@@ -161,19 +165,20 @@ public class Monster {
 		
 		monster.setGender((rand.nextBoolean() ) ? Gender.MALE: Gender.FEMALE);
 		
-		monster.setName((monster.isMale() ) ? nameGen.male(rand): nameGen.female(rand) );
+		
 		
 		monster.ageRate = mutation(rand) * 1e-6f;
 		monster.strengthCoefficient = (int) (mutation(rand) * 50);
 		monster.toughnessCoefficient = (int) (mutation(rand) * 50);
 		monster.evadeCoefficient = (int) (mutation(rand) * 50);
 		
-		monster.fertility =  rand.nextDouble();
+		monster.fertility =  Math.abs(rand.nextDouble() );
 		monster.injuryChance = (int) (mutation(rand) * 20);
 		
 		return monster;
 		
-	}
+}
+	
 	
 	/**
 	 * Utility function for genetic crossover.
@@ -201,7 +206,6 @@ public class Monster {
 			Monster monster = new Monster();
 			
 			monster.setGender((rand.nextBoolean()) ? Gender.MALE: Gender.FEMALE);
-			monster.setName((monster.isMale() ) ? nameGen.male(rand): nameGen.female(rand) );
 			monster.setOwner(this.getOwner() );
 			
 			monster.ageRate = crossover(rand, this.ageRate, father.ageRate);
