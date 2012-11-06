@@ -135,7 +135,7 @@ public class Monster {
 	 * 
 	 * @return A random number with a binomial distribution on the interval (0,1)
 	 */
-	public static double mutation(java.util.Random rand) {
+	protected static double mutation(java.util.Random rand) {
 		final int ITERATIONS = 3;
 		final int WORDLENGTH = 31;
 		
@@ -156,7 +156,7 @@ public class Monster {
 		
 		monster.setGender((rand.nextBoolean() ) ? Gender.MALE: Gender.FEMALE);
 		
-		synchronized(nameGen) { monster.setName((monster.isMale() ) ? nameGen.male(): nameGen.female() ); }
+		monster.setName((monster.isMale() ) ? nameGen.male(rand): nameGen.female(rand) );
 		
 		monster.ageRate = mutation(rand) * 1e-6f;
 		monster.strengthCoefficient = (int) (mutation(rand) * 50);
@@ -170,9 +170,9 @@ public class Monster {
 		
 	}
 	
-public static double crossover (java.util.Random rand, double a, double b) {
-	return (rand.nextBoolean() ) ? a: b;
-}
+	protected static double crossover (java.util.Random rand, double a, double b) {
+		return (rand.nextBoolean() ) ? a: b;
+	}
 	
 	public ArrayList<Monster> breed (Monster father) {
 		java.util.Random rand = new java.util.Random(); 
@@ -183,7 +183,7 @@ public static double crossover (java.util.Random rand, double a, double b) {
 			Monster monster = new Monster();
 			
 			monster.setGender((rand.nextBoolean()) ? Gender.MALE: Gender.FEMALE);
-			synchronized(nameGen) { monster.setName((monster.isMale() ) ? nameGen.male(): nameGen.female() ); }
+			monster.setName((monster.isMale() ) ? nameGen.male(rand): nameGen.female(rand) );
 			monster.setOwner(this.getOwner() );
 			
 			monster.ageRate = crossover(rand, this.ageRate, father.ageRate);

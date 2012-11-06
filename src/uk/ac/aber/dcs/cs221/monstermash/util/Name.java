@@ -17,12 +17,10 @@ public class Name {
 
 	private ArrayList<String> maleNameList;
 	private ArrayList<String> femaleNameList;
-	private Random rand;
 	
 	
 	public Name() {
 		this.init();
-		rand = new Random();
 	}
 	
 	/**
@@ -69,7 +67,7 @@ public class Name {
 	 * @param male True if a male name is needed, else false.
 	 * @return A random name.
 	 */
-	protected String random (boolean male) {
+	protected String random (boolean male, java.util.Random rand) {
 		ArrayList<String> list = (male) ? maleNameList: femaleNameList;
 		
 		return list.get(rand.nextInt(list.size() ) );
@@ -79,12 +77,12 @@ public class Name {
 	 * Wrapper for @see #random(boolean).
 	 * @return A male name.
 	 */
-	public String male() { return random(true); }
+	public String male(java.util.Random rand) { return random(true, rand); }
 	/**
 	 * Wrapper for @see #random(boolean).
 	 * @return A female name.
 	 */
-	public String female() { return random(false); }
+	public String female(java.util.Random rand) { return random(false, rand); }
 
 	public static void main (String[] args) {
 		Name name = new Name();
