@@ -8,10 +8,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * 
+ * Utility class for generating random names by gender.
  * @author Jacob Smith, jas32
  *
- * Utility class for generating random names by gender.
+ * 
  */
 public class Name {
 
