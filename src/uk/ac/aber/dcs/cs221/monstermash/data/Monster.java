@@ -132,7 +132,8 @@ public class Monster {
 	}
 	
 	/**
-	 * 
+	 * Mutation function implemented using a binomial distribution with number of trials, n=93 and p=1/2.
+	 * @param The PRNG state object.
 	 * @return A random number with a binomial distribution on the interval (0,1)
 	 */
 	protected static double mutation(java.util.Random rand) {
@@ -150,6 +151,10 @@ public class Monster {
 		return (double)(count) / (WORDLENGTH*ITERATIONS);
 	}
 	
+	/**
+	 * Generates a new Monster populated with random attributes.
+	 * @return A new 'starter' Monster.
+	 */
 	public static Monster generateRandom() {
 		Monster monster = new Monster();
 		java.util.Random rand = new java.util.Random();
@@ -170,10 +175,23 @@ public class Monster {
 		
 	}
 	
+	/**
+	 * Utility function for genetic crossover.
+	 * @param rand The PRNG state object.
+	 * @param a The first parent's gene.
+	 * @param b The second parent's gene.
+	 * @return One of the two genes, each with a 50/50 chance.
+	 */
 	protected static double crossover (java.util.Random rand, double a, double b) {
 		return (rand.nextBoolean() ) ? a: b;
 	}
 	
+	/**
+	 * Breeds two monsters together to produce a list of children. The children automatically belong
+	 * to the mother's owner.
+	 * @param father The father with which to breed.
+	 * @return A list of the new children produced.
+	 */
 	public ArrayList<Monster> breed (Monster father) {
 		java.util.Random rand = new java.util.Random(); 
 		int numChildren = (int) (Math.sqrt(this.fertility * father.fertility) * MAX_NUM_CHILDREN);
