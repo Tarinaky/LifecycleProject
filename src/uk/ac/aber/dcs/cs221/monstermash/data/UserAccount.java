@@ -1,6 +1,8 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +17,7 @@ public class UserAccount extends java.util.Observable {
 	private volatile String email;
 	
 	private volatile String password;
-	private volatile ArrayList<Object> listOfMonsters;
+	private volatile ArrayList<Monster> listOfMonsters;
 		
 	/**
 	 * Compare a given string with the password on file.
@@ -35,6 +37,8 @@ public class UserAccount extends java.util.Observable {
 	 */
 	public UserAccount(long primaryKey) {
 		this.primaryKey = primaryKey;
+		
+		this.listOfMonsters = new ArrayList<Monster>();
 	}
 	
 	/**
@@ -91,6 +95,15 @@ public class UserAccount extends java.util.Observable {
 		password = json.getString("password");
 		return this;
 		
+	}
+
+	
+	public synchronized void addMonster(Monster monster) {
+		this.listOfMonsters.add(monster);
+	}
+	
+	public synchronized void removeMonster(Monster monster) {
+		this.listOfMonsters.remove(monster);
 	}
 }
 

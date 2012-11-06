@@ -2,6 +2,8 @@ package uk.ac.aber.dcs.cs221.monstermash.data;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
+
 
 import uk.ac.aber.dcs.cs221.monstermash.util.Name;
 
@@ -67,7 +69,13 @@ public class Monster {
 	 * @param owner The monster's owner.
 	 * @return This monster object.
 	 */
-	public synchronized Monster setOwner(UserAccount owner) { this.owner = owner; return this; }
+	public synchronized Monster setOwner(UserAccount owner) {
+		if (this.owner != null) { this.owner.removeMonster(this); }
+		this.owner = owner;
+		this.owner.addMonster(this);
+		return this;
+		
+	}
 	/**
 	 * 
 	 * @return The monster's owner.
@@ -234,6 +242,11 @@ public class Monster {
 		}
 		
 		return returnedChildren;
+		
+	}
+	
+	public synchronized void reap() {
+		this.owner.removeMonster(this);
 		
 	}
 	
