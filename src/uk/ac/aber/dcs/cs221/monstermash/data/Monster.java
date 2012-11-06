@@ -28,7 +28,7 @@ public class Monster {
 	protected volatile int toughnessCoefficient;
 	
 	protected volatile int fertility;
-	protected volatile double injuryChance;
+	protected volatile int injuryChance;
 	
 	protected static Name nameGen;
 	
@@ -126,7 +126,25 @@ public class Monster {
 		return (int) (toughnessCoefficient*(Math.exp(ageRate * getAge() ) - 1) * getHealth() );
 	}
 	
-	
+	public static Monster generateRandom() {
+		Monster monster = new Monster();
+		java.util.Random rand = new java.util.Random();
+		
+		monster.setGender((rand.nextBoolean() ) ? Gender.MALE: Gender.FEMALE);
+		
+		synchronized(nameGen) { monster.setName((monster.isMale() ) ? nameGen.male(): nameGen.female() ); }
+		
+		monster.ageRate = rand.nextGaussian() * 1e-6f;
+		monster.strengthCoefficient = (int) (rand.nextGaussian() * 50);
+		monster.toughnessCoefficient = (int) (rand.nextGaussian() * 50);
+		monster.evadeCoefficient = (int) (rand.nextGaussian() * 50);
+		
+		monster.fertility =  (int) (rand.nextGaussian() * 3);
+		monster.injuryChance = (int) (rand.nextGaussian() * 50);
+		
+		return monster;
+		
+	}
 	
 
 }
