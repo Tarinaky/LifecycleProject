@@ -97,11 +97,18 @@ public class UserAccount extends java.util.Observable {
 		
 	}
 
-	
+	/**
+	 * This method is called by  {@link Monster#setOwner(UserAccount)}.
+	 * @param monster The monster to associate with this UserAccount.
+	 */
 	public synchronized void addMonster(Monster monster) {
 		this.listOfMonsters.add(monster);
 	}
 	
+	/**
+	 * This method is called by {@link Monster#setOwner(UserAccount)} and {@link Monster#reap()}.
+	 * @param monster The monster to remove from this UserAccount.
+	 */
 	public synchronized void removeMonster(Monster monster) {
 		this.listOfMonsters.remove(monster);
 	}

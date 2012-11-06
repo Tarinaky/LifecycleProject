@@ -65,7 +65,7 @@ public class Monster {
 	public long getUID() { return primaryKey; }
 	
 	/**
-	 * 
+	 * Creates a reciprocal association between this monster and an owning UserAccount.
 	 * @param owner The monster's owner.
 	 * @return This monster object.
 	 */
@@ -96,7 +96,7 @@ public class Monster {
 	
 	/**
 	 * Sets the monster's gender and immediately gives the monster a random
-	 * gender appropriate name. @see Gender.
+	 * gender appropriate name. {@link #Gender}
 	 * @param gender The monster's gender.
 	 * @return This monster object.
 	 */
@@ -245,6 +245,9 @@ public class Monster {
 		
 	}
 	
+	/**
+	 * Mark this monster for removal from the game (by removing it from the owning UserAccount).
+	 */
 	public synchronized void reap() {
 		this.owner.removeMonster(this);
 		
