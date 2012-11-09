@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.TreeSet;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -85,6 +86,10 @@ public class UserAccount extends java.util.Observable {
 		json.put("email", email);
 		json.put("password", password);
 		
+		for (Monster monster: monsters) {
+			json.append("monsters", monster.buildJSON() );
+		}
+		
 		return json;
 	}
 
@@ -97,6 +102,13 @@ public class UserAccount extends java.util.Observable {
 		primaryKey = json.getLong("primaryKey");
 		email = json.getString("email");
 		password = json.getString("password");
+		
+		JSONArray monsters = json.optJSONArray("monsters");
+		if (monsters != null) {
+			for (int i = 0; i < monsters.length(); ++i) {
+				this.monsters.add(Monster.readJSON(this,monsters.getJSONObject(i) ) );
+			}
+		}
 		return this;
 		
 	}

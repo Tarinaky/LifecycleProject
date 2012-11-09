@@ -19,6 +19,8 @@ public class MonsterTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		
+		Monster.init(1);
+		
 		monster = new Monster();
 	}
 

@@ -14,10 +14,13 @@ public class TableOfAccountsTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		Monster.init(1);
 		accounts = new TableOfAccounts();
 		accounts.addUser("barry@hotmail.com").setPassword("spider");
 		accounts.addUser("colin@gmail.com").setPassword("roflcopter");
 		accounts.addUser("locked@yahoo.co.uk");
+		
+		Monster.generateRandom().setOwner(accounts.lookup("colin@gmail.com") );
 		
 	}
 

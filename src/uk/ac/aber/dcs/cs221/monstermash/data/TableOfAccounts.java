@@ -75,7 +75,9 @@ public class TableOfAccounts implements Observer {
 		//List of users
 		for (UserAccount account: accountsByEmail.values()) {
 			json.append("users",account.buildJSON() );
+			
 		}
+		
 		
 		
 		return json;
@@ -103,6 +105,7 @@ public class TableOfAccounts implements Observer {
 			accountsByUID.put(account.getUID(), account);
 			account.addObserver(this);
 		}
+		
 		
 		
 		return this;

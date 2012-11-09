@@ -19,8 +19,10 @@ public class Monster implements Comparable<Monster> {
 	public static final int MAX_NUM_CHILDREN = 10;
 	
 	private static volatile long nextPrimaryKey = 1;
+	private static volatile boolean isInit = false;
 	
 	private volatile long primaryKey;
+	
 	private volatile UserAccount owner;
 	
 	private volatile String name;
@@ -44,6 +46,11 @@ public class Monster implements Comparable<Monster> {
 	
 	private volatile int injuries;
 	
+	public synchronized static void init(long nextPrimaryKey) {
+		Monster.nextPrimaryKey = nextPrimaryKey;
+		Monster.isInit = true;
+	}
+	
 	/**
 	 * Public constructor.
 	 * 
@@ -52,6 +59,7 @@ public class Monster implements Comparable<Monster> {
 	 */
 	public Monster() {
 		synchronized (getClass() ) {
+			if (isInit == false) { throw new RuntimeException(); }
 			primaryKey = nextPrimaryKey++;
 			if (nameGen == null) { nameGen = new Name(); }
 		}
@@ -301,7 +309,7 @@ public class Monster implements Comparable<Monster> {
 		return json;
 	}
 	
-	public static Monster readJSON(TableOfAccounts accounts, JSONObject json) throws JSONException {
+	public static Monster readJSON(UserAccount owner, JSONObject json) throws JSONException {
 		long primaryKey = json.getLong("primaryKey");
 		Monster monster = new Monster(primaryKey);
 		
@@ -313,7 +321,7 @@ public class Monster implements Comparable<Monster> {
 		monster.injuries = json.getInt("injuries");
 		monster.injuryChance = json.getInt("injuryChance");
 		monster.name = json.getString("name");
-		monster.setOwner(accounts.lookup(json.getLong("owner") ) );
+		monster.setOwner(owner);
 		monster.strengthCoefficient = json.getInt("strength");
 		monster.toughnessCoefficient = json.getInt("toughness");
 		
