@@ -67,6 +67,8 @@ public class MonsterTest extends TestCase {
 	public void testGenerateRandom() throws JSONException {
 		Monster monster = Monster.generateRandom().setOwner(new UserAccount(1));
 		System.out.println("Starter Monster: "+monster.buildJSON().toString() );
+		
+		assertTrue(monster.getHealth() > 0);
 	}
 
 	@Test

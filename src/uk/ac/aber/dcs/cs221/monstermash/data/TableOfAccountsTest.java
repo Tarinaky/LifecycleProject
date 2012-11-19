@@ -61,7 +61,21 @@ public class TableOfAccountsTest {
 				"	{ " +
 				"	\"email\": \"barry@hotmail.com\", " +
 				"	\"password\": \"kargoth\", " +
-				"	\"primaryKey\": 1" +
+				"	\"primaryKey\": 1," +
+				"    \"monsters\": [{" +
+                " \"dateOfBirth\": 1353345859915, "+
+                " \"evade\": 28, "+
+                " \"injuries\": 0,"+
+                " \"strength\": 26,"+
+                " \"ageRate\": 4.946236546651738E-7,"+
+                " \"primaryKey\": 1,"+
+                " \"name\": \"Artur\","+
+                " \"owner\": 2,"+
+                " \"gender\": \"male\","+
+                " \"fertility\": 0.12582970453416575,"+
+                " \"toughness\": 20,"+
+                " \"injuryChance\": 10"+
+            "}]" +
 				"	}] " +
 				"}";
 		TableOfAccounts loaded = new TableOfAccounts().readJSON(data);
