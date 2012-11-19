@@ -1,6 +1,7 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.TreeSet;
@@ -20,6 +21,9 @@ public class UserAccount extends java.util.Observable {
 	
 	private volatile String password;
 	private volatile TreeSet<Monster> monsters;
+	
+	private volatile List<UserAccount> friends;
+	private volatile List<Offer> offers;
 		
 	/**
 	 * Compare a given string with the password on file.
@@ -44,6 +48,8 @@ public class UserAccount extends java.util.Observable {
 		this.primaryKey = primaryKey;
 		
 		this.monsters = new TreeSet<Monster>();
+		this.friends = new ArrayList<UserAccount>();
+		this.offers = new ArrayList<Offer>();
 	}
 	
 	/**
@@ -128,5 +134,42 @@ public class UserAccount extends java.util.Observable {
 	public synchronized void removeMonster(Monster monster) {
 		this.monsters.remove(monster);
 	}
+
+	public synchronized UserAccount addFriend(UserAccount source) {
+		this.friends.add(source);	
+		return this;
+	}
+	
+	/**
+	 * Send an offer ({@link Offer}) to this user for consideration using this method.
+	 * @param o An Offer object.
+	 * @return This.
+	 */
+	public synchronized UserAccount sendOffer(Offer o) {
+		this.offers.add(o);
+		return this;
+	}
+	
+	/**
+	 * Return a copy of the list of offers this user has to respond to.
+	 * 
+	 * Note, this is a copy of the list and any alterations will not be copied back.
+	 * @return
+	 */
+	public synchronized Offer[] getOffers() {
+		return (Offer[]) this.offers.toArray();
+	}
+	
+	/**
+	 * Remove an offer, either because it has been declined, accepted or simply become invalid.
+	 * @param o
+	 * @return
+	 */
+	public synchronized UserAccount removeOffer(Offer o) {
+		this.offers.remove(o);
+		return this;
+	}
+
+	
 }
 
