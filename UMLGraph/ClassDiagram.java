@@ -11,15 +11,25 @@ class HashMap{}
 */
 class ArrayList<Monster>{}
 
+class JSONObject{}
+
 /**
  * @composed 1 - * Monster
+ * @assoc * - * UserAccount
+ * @composed 1 - * Offer
 */
 class UserAccount extends java.util.Observable {
 	private long primaryKey;
 	private string email;
 	
+	private int cash;
+	
 	private string password;
-	private ArrayList<Monster> listOfMonsters;
+	private java.util.TreeSet<Monster> monsters;
+	private java.util.List<UserAccount> friends;
+	private java.util.List<Offer> offers;
+	
+	public long getUID();	
 		
 	public UserAccount(long primaryKey){}
 	
@@ -31,82 +41,188 @@ class UserAccount extends java.util.Observable {
 	
 	public JSONObject buildJSON(){}
 	public UserAccount readJSON(){}
+	
+	public void addMonster(Monster monster);
+	public void removeMonster(Monster monster);
+	
+	public UserAccount addFriend(UserAccount newFriend);
+	public UserAccount sendOffer(Offer o);
+	
+	public Offer[] getOffers();
+	public UserAccount[] getFriends();
+	public Monster[] getMonsters();
+	
+	public boolean deductCash(int cost);
+	public int getCash();
+	public int worth();
 }
 /**
  * @composed 1 - * UserAccount
 */
 class TableOfAccounts implements java.util.Observer {
 	private long nextAccountKey;
-	private HashMap accounts;
+	private HashMap accountsByEmail;
+	private HashMap accountsByUID;
+	
 
 	public TableOfAccounts(){}
 		
 	public UserAccount lookup(string email){}
+	public UserAccount lookup(long uid);
 	public UserAccount addUser(string email){}
 	
 	public JSONObject buildJSON(){}
-	public TableOfAccounts readJSON(String expression){}
+	public TableOfAccounts readJSON(JSONObject json){}
 }
 
 /**
-  * @note 'Amplitude' is the value of an attribute at its peak. A 'Lambda', or time-coefficient,
-  governs the rate of change in an exponential function - it is called lambda by analogy to 
-  physical processes with exponential functions (ie Radioactive Decay). The former is assigned on 
-  a per-attribute basis (i.e. a seperate gene for each attribute's Amplitude). The latter appears 
-  to be global for all attributes - using a single 'age_rate' double. Also note that 'Amplitudes' 
-  are integer values, while 'Lambdas' are rational (a smaller fraction indicates a slower aging 
-  process - greater than 1 and the creature has the life-expectancy of a mayfly).
-
-  * @note getHealth returns the Monster's health at the instant it is called. A creature whose 
-  instantaneous health is greater than 0 is 'alive' and may perform actions. A creature whose 
-  instantaneous health is less than or equal to 0 has died of natural causes. A creature's health 
-  at any instant is given by 2-e^(\lambda t). \lambda is the coefficient of decay, a smaller 
-  (fractional) value indicates that the creature will age more slowly. t is the time in days. 
-  The natural lifespan of a creature should be given by t = ln(2)/\lambda. A creature's Health can be 
-  reduced by Injuries - bringing about an earlier demise.
-
-  @note Strength, Evasion and Toughness are calculated from an 'Amplitude' coefficient (determining 
-  their peak value) and a 'Lambda' time coefficient determining the time it takes to reach that peak, 
-  and how fast the creature 'decays' from that peak. The amplitude is called 'a' and the time coefficient 
-  is called 'lambda'. These three attributes are given by a[e^(\lambda t)-1][2-e^(\lambda t)]. Noting that 
-  \lambda is the age_rate field and a is the 'Amplitude' for that characteristic.
-
-  @note Appendix A of the Requirements Specification includes the functions dealing with reproduction and 
-  fertility - they are not reproduced here for space concerns.
+  
  */
 class Monster {
+	public static final int MAX_NUM_CHILDREN;
+	private static long nextPrimaryKey;
+	private static boolean isInit;
 	private long primaryKey;
 	private UserAccount owner;
 	
-	private string monsterName;
-	private boolean gender;
+	private string name;
+	public enum Gender {MALE, FEMALE };
+	private Gender gender;
+	
 	private java.util.Date dateOfBirth;
 
 	protected double age_rate;
 	
-	protected int strength_amplitude;
-
-	protected int evade_amplitude;
+	protected int strengthCoefficient;
+	protected int evadeCoefficient;
+	protected int toughnessCoefficient;
 
 	protected int fertility;
 
 	protected double injuryChance;
 	protected int injuries;
 
-	protected int toughness_amplitude;
+	private boolean forSale;
+	private boolean forTupping;
+	
+	public boolean isForSale();
+	public boolean isForSale(boolean b);
+	public boolean isForTupping();
+	public boolean isForTupping(boolean b);
 
+	public static void init(long nextPrimaryKey);
+	
+	public Monster();
+	protected Monster(long primaryKey);
+	
+	public long getUID();
+	
+	public Monster setOwner(UserAccount owner);
+	public UserAccount getOwner();
+	
+	public Monster setName(String name);
+	public String getName();
+	
+	public Monster setGender(Gender gender);
+	public boolean isMale();
+	
+	public long getAge();
+	
 	public double getHealth();
 	public int getStrength();
 	public int getEvade();
+	public int getToughness();
+
+	protected static double mutation(java.util.Random rand);
+	protected static double crossover(java.util.Random rand, double a, double b);
+	public static Monster genderateRandom();
+	
+	public java.util.ArrayList<Monster> breed(Monster father);
+	
 	public double getFertility();
 	public double getInjuryChance();
 	public void injure();
-	public void kill();
+	public void reap();
 	public int getMaxHP();
-
+	
+	public int compareTo(Monster arg0);
+	
+	public JSONObject buildJSON();
+	public static Monster readJSON(UserAccount owner, JSONObject json);
+	
+	public int worth();
 
 }
 	
+class FriendOffer extends Offer {}
+
+abstract class Offer {
+	private UserAccount source;
+	private UserAccount receiver;
+	
+	public Offer setSource(UserAccount source);
+	public Offer setReceiver(UserAccount receiver);
+	public UserAccount getSource();
+	public UserAccount getReceiver();
+	
+	public abstract void accept();
+	
+	public JSONObject buildJSON();
+	public static Offer readJSON(UserAccount receiver, TableOfAccounts accounts, JSONObject json);
+}
+
+class BattleOffer extends Offer {
+	private Monster challenger;
+	private Monster challenged;
+	
+	public BattleOffer setChallenger(Monster challenger);
+	public Monster getChallenger();
+	public BattleOffer setChallenged(Monster challenged);
+	public Monster getChallenged();
+}
+
+class RemoteMonster extends Monster {
+	protected RemoteServer remote;
+}
+
+class RemoteUser extends UserAccount {
+	protected RemoteServer remote;
+}
+/**
+ * 
+ * @assoc 1 - * RemoteUser
+ * @assoc 1 - * RemoteMonster
+ */
+class RemoteServer {
+	private String serverAddress;
+	private int port;
+	private String serverName;
+	private String password;
+	
+	public RemoteServer setServerAddress(String addr, int port);
+	public RemoteServer setServerName(String name);
+	public RemoteServer setServerPassword(String password);
+	
+	public JSONObject query(String query);
+	public String getName();
+	public boolean authenticate(String password);
+	
+	public JSONObject buildJSON();
+	public static RemoteServer readJSON(JSONObject json);
+}
+/**
+ * 
+ * @composed 1 - * RemoteServer
+ *
+ */
+class Servers {
+	private HashMap servers;
+	public RemoteServer lookup(String name);
+	
+	public JSONObject buildJSON();
+	public static Servers readJSON(JSONObject json);
+	
+}
 
 	
 
