@@ -13,14 +13,14 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
  </session-config>
  
  <servlet>   
-   <servlet-name>Test2</servlet-name>
-   <servlet-class>uk.ac.aber.dcs.cs221.monstermash.UI.test.Servlet</servlet-class>
+   <servlet-name>LoginController</servlet-name>
+   <servlet-class>monstermash.UI.HttpServletPackage.LoginController</servlet-class>
    
  </servlet>
  
  <servlet-mapping>
-   <servlet-name>Test2</servlet-name>
-   <url-pattern>/servlet1</url-pattern>
+   <servlet-name>LoginController</servlet-name>
+   <url-pattern>/LoginController</url-pattern>
  </servlet-mapping>
  
 
