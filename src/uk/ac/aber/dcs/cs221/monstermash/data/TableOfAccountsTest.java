@@ -81,5 +81,15 @@ public class TableOfAccountsTest {
 		TableOfAccounts loaded = new TableOfAccounts().readJSON(data);
 		assertTrue(loaded.lookup("barry@hotmail.com").checkPassword("kargoth"));
 	}
+	
+	@Test
+	public void testDataSingleton() {
+		TableOfAccounts t = DataSingleton.get();
+		assertTrue(t != null);
+		
+		DataSingleton.save();
+		
+		return;
+	}
 
 }
