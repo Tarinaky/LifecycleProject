@@ -16,6 +16,13 @@ public class DataSingleton {
 	static synchronized TableOfAccounts get() {
 		if (instance == null) {
 			instance = new TableOfAccounts();//Initialise
+			
+			//Serialise on exit.
+			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+				public void run() {
+					DataSingleton.save();
+				}
+			}));
 			//Try to load from file.
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(dataPath));
