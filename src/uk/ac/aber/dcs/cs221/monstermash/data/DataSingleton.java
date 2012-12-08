@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.TimerTask;
 
 import org.json.JSONException;
 
@@ -12,6 +13,7 @@ public class DataSingleton {
 	
 	static volatile TableOfAccounts instance = null;
 	final static String dataPath = "monstermash_data_persistance.json";
+	final static int serialisationPeriod = 60000;//One minute in miliseconds.
 	
 	static synchronized TableOfAccounts get() {
 		if (instance == null) {
@@ -23,6 +25,16 @@ public class DataSingleton {
 					DataSingleton.save();
 				}
 			}));
+			
+			//Serialise periodically.
+			java.util.Timer timer = new java.util.Timer();
+			TimerTask periodicSerialisation = new TimerTask() {
+				public void run() {
+					DataSingleton.save();
+				}
+			};
+			timer.schedule(periodicSerialisation, serialisationPeriod);
+			
 			//Try to load from file.
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(dataPath));
