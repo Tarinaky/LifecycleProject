@@ -15,7 +15,7 @@ public class DataSingleton {
 	final static String dataPath = "monstermash_data_persistance.json";
 	final static int serialisationPeriod = 60000;//One minute in miliseconds.
 	
-	static synchronized TableOfAccounts get() {
+	public static synchronized TableOfAccounts get() {
 		if (instance == null) {
 			instance = new TableOfAccounts();//Initialise
 			
@@ -60,7 +60,7 @@ public class DataSingleton {
 		return instance;
 	}
 	
-	static synchronized void save() {
+	public static synchronized void save() {
 		TableOfAccounts t = get();
 		
 		try {
