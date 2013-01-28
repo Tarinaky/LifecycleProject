@@ -26,7 +26,7 @@ public class BattleOffer extends Offer {
 			return;
 		}
 		
-		//TODO: Handle battle
+		this.battle = new Battle(defender, challenger);
 		
 		this.getReceiver().removeOffer(this);
 		
@@ -44,6 +44,9 @@ public class BattleOffer extends Offer {
 	 * copy a reference into a local variable before accept()ing.
 	 */
 	public Battle getBattle() {
+		if (this.battle == null) {
+			return null;
+		}
 		if (this.battle.isValid() ) {
 			return this.battle;
 		} else {
@@ -57,11 +60,11 @@ public class BattleOffer extends Offer {
 	public Monster getChallenger() {
 		return challenger;
 	}
-	public synchronized Offer setChallenger(Monster challenger) {
+	public synchronized BattleOffer setChallenger(Monster challenger) {
 		this.challenger = challenger;
 		return this;
 	}
-	public synchronized Offer setDefender(Monster defender) {
+	public synchronized BattleOffer setDefender(Monster defender) {
 		this.defender = defender;
 		return this;
 	}

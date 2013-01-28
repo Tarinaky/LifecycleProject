@@ -3,6 +3,7 @@ package uk.ac.aber.dcs.cs221.monstermash.data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
+import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -152,7 +153,7 @@ public class Monster implements Comparable<Monster> {
 	 * @return The monster's health, less than 1. If less than 0 this indicates the monster should be reaped.
 	 */
 	public double getHealth() {
-		return 2 - Math.exp(ageRate * getAge() ); //$2-e^{\lambda t}$
+		return 2 - injuries*0.1 - Math.exp(ageRate * getAge() ); //$2-e^{\lambda t}$
 	}
 	/**
 	 * 
@@ -358,6 +359,14 @@ public class Monster implements Comparable<Monster> {
 	}
 	public synchronized boolean isForSale(boolean b) {
 		return this.forSale = b;
+	}
+
+	public synchronized void checkForInjury(Random prng) {
+		if (prng.nextInt() % 100 < this.injuryChance) {
+			this.injuries += 1;
+		}
+		
+		
 	}
 	
 

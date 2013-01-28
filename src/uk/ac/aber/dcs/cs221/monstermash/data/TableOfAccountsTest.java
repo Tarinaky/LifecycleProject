@@ -113,5 +113,32 @@ public class TableOfAccountsTest {
 		
 		
 	}
+	
+	@Test
+	public void testBattle() {
+		UserAccount a = accounts.lookup("barry@hotmail.com");
+		UserAccount b = accounts.lookup("locked@yahoo.co.uk");
+		
+		Monster monsterA = Monster.generateRandom();
+		Monster monsterB = Monster.generateRandom();
+		
+		monsterA.setOwner(a);
+		monsterB.setOwner(b);
+		
+		Offer battleOffer = new BattleOffer()
+			.setChallenger(monsterA)
+			.setDefender(monsterB)
+			.setSource(a)
+			.setReceiver(b);
+		b.sendOffer(battleOffer);
+		
+		b.getOffers()[0].accept();
+		Battle battle = ((BattleOffer) battleOffer).getBattle();
+		assertTrue(battle.isValid() );
+		System.out.println("Sample battle log:");
+		for (String line: battle.getLog()) {
+			System.out.println(line);
+		}
+	}
 
 }
