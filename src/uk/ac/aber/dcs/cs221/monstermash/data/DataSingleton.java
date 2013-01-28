@@ -19,22 +19,6 @@ public class DataSingleton {
 		if (instance == null) {
 			instance = new TableOfAccounts();//Initialise
 			
-			//Serialise on exit.
-			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-				public void run() {
-					DataSingleton.save();
-				}
-			}));
-			
-			//Serialise periodically.
-			java.util.Timer timer = new java.util.Timer();
-			TimerTask periodicSerialisation = new TimerTask() {
-				public void run() {
-					DataSingleton.save();
-				}
-			};
-			timer.schedule(periodicSerialisation, serialisationPeriod);
-			
 			//Try to load from file.
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(dataPath));
@@ -53,8 +37,25 @@ public class DataSingleton {
 				System.err.println("Could not open file "+dataPath+" for reading");
 			} catch (JSONException e) {
 				e.printStackTrace();
-				System.err.println("Could not generate JSON.");
+				System.err.println("Could not parse file "+dataPath+".");
 			}
+			
+			//Serialise on exit.
+			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+				public void run() {
+					DataSingleton.save();
+				}
+			}));
+			
+			//Serialise periodically.
+			java.util.Timer timer = new java.util.Timer();
+			TimerTask periodicSerialisation = new TimerTask() {
+				public void run() {
+					DataSingleton.save();
+				}
+			};
+			timer.schedule(periodicSerialisation, serialisationPeriod);
+			
 			
 		}
 		return instance;

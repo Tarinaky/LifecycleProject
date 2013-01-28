@@ -91,5 +91,18 @@ public class TableOfAccountsTest {
 		
 		return;
 	}
+	
+	@Test
+	public void testFriends() {
+		UserAccount a = accounts.lookup("barry@hotmail.com");
+		UserAccount b = accounts.lookup("locked@yahoo.co.uk");
+		Offer offer = new FriendOffer();
+		offer.setSource(a);
+		offer.setReceiver(b);
+		b.sendOffer(offer);
+		b.getOffers()[0].accept();
+		assertTrue(a.getFriends().length > 0);
+		assertTrue(b.getFriends().length > 0);
+	}
 
 }

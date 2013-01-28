@@ -157,7 +157,7 @@ public class UserAccount extends java.util.Observable {
 	 * @return
 	 */
 	public synchronized Offer[] getOffers() {
-		return (Offer[]) this.offers.toArray();
+		return this.offers.toArray(new Offer[1]);
 	}
 	
 	/**
@@ -168,6 +168,10 @@ public class UserAccount extends java.util.Observable {
 	public synchronized UserAccount removeOffer(Offer o) {
 		this.offers.remove(o);
 		return this;
+	}
+	
+	public synchronized UserAccount[] getFriends() {
+		return this.friends.toArray(new UserAccount[1]);
 	}
 
 	
