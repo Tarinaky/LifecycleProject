@@ -15,7 +15,7 @@ table {
 .td_home {
     background-color: #E0E0E0;
     width: 150px;
-    height: 200px; 
+    height: 200px;
 }
 
 .td_request {
@@ -82,7 +82,7 @@ table {
 	width: 1000px;
 	background: #333;
 	padding: 0 auto;
-	margin: 0 auto;
+	margin-top: -4px;
 }
 
 #monsters {
@@ -124,7 +124,7 @@ table {
 }
 
 #navigation li a:hover, #login_navigation li a:hover, a:hover { 
-    background: #135BA0; 
+    background: #5EA319;
 }
 
 #content
