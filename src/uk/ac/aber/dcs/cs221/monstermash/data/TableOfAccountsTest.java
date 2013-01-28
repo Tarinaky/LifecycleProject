@@ -103,6 +103,11 @@ public class TableOfAccountsTest {
 		b.getOffers()[0].accept();
 		assertTrue(a.getFriends().length > 0);
 		assertTrue(b.getFriends().length > 0);
+		
+		//Remove friend relationship
+		a.removeFriend(b);
+		
+		
 	}
 
 }

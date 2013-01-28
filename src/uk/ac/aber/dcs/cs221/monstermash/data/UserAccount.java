@@ -173,6 +173,15 @@ public class UserAccount extends java.util.Observable {
 	public synchronized UserAccount[] getFriends() {
 		return this.friends.toArray(new UserAccount[1]);
 	}
+	
+	public synchronized UserAccount removeFriend(UserAccount friend) {
+		if (this.friends.contains(friend) ) {		
+			this.friends.remove(friend);
+			friend.removeFriend(this);
+		}
+		
+		return this;
+	}
 
 	
 }
