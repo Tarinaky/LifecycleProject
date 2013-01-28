@@ -1,0 +1,159 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-image:url('background_image.png');
+}
+
+tr {
+    
+}
+
+td {
+    background-image:url('monster_box.jpg');
+    width: 150px;
+    height: 200px; 
+}
+
+#container {
+    margin: auto;
+    width: 500px;
+}
+
+#login_container {
+    margin: auto;
+    width: 1000px;
+}
+
+#header {
+    padding: 0;
+    margin: 10px auto;
+	background: #fff;
+	width: 500px;
+	text-align: center;
+}
+
+#login_header {
+    padding: 0;
+    margin: 10px auto;
+	background: #fff;
+	width: 1000px;
+	text-align: center;
+}
+
+#username {
+    float: right;
+	margin: 0;
+	padding: 0;
+	width: 500px;
+}
+
+#navigation {
+	float: left;
+	width: 500px;
+	background: #333;
+	padding: 0;
+	margin: 0;
+}
+
+#login_navigation {
+	float: left;
+	width: 1000px;
+	background: #333;
+	padding: 0;
+	margin: 0;
+}
+
+#monsters {
+    float: center; 
+    border:1px solid black;
+    width:150%;
+    height:250px;
+    overflow-y:hidden;
+    overflow-x:scroll;
+    padding: 10px 10px;
+}
+
+#navigation ul, #login_navigation ul {
+	margin: 0;
+	padding: 0;
+}
+
+#navigation ul li, #login_navigation ul li {
+	list-style-type: none;
+	display: inline;
+}
+
+#navigation li a, #login_navigation li a {
+	display: block;
+	float: left;
+	padding: 5px 10px;
+	color: #fff;
+	text-decoration: none;
+	border-right: 1px solid #fff;
+}
+
+#navigation ul p, #login_navigation ul p {
+    display: block;
+    float: right;
+    padding: 5px 10px;
+	color: #fff;
+	text-decoration: none;
+	border-left: 1px solid #fff;
+}
+
+#navigation li a:hover, #login_navigation li a:hover, a:hover { 
+    background: #135BA0; 
+}
+
+#content
+{
+	width: 460px;
+	padding: 20px;
+	text-align:center;
+	background: #fff;
+	padding-bottom: 20px;
+}
+
+#login_content
+{
+	width: 960px;
+	padding: 20px;
+	text-align:left;
+	background: #fff;
+	padding-bottom: 20px;
+}
+
+#content h1 {
+    color: #135BA0;
+    size: 8px;
+}
+
+#content p {
+    text-align:center;
+}
+
+#footer
+{
+	width: 500px;
+	background: #333;
+	padding: 0;
+	margin: 0;
+	margin-top: -15px;
+	text-align: center;
+}
+
+#login_footer
+{
+	width: 1000px;
+	background: #333;
+	padding: 0;
+	margin: 0;
+	margin-top: -15px;
+	text-align: center;
+}
+
+#footer p, #login_footer p {
+    color: #fff;
+    padding: 5px 10px;
+    
+
