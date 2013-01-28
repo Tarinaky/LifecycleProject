@@ -329,4 +329,13 @@ public class Monster implements Comparable<Monster> {
 		
 	}
 
+	public int worth() {
+		int accumulator = 0;
+		accumulator += this.getHealth();
+		accumulator += this.getStrength();
+		accumulator += this.getToughness();
+		accumulator += this.getEvade();
+		return accumulator;
+	}
+
 }

@@ -61,6 +61,7 @@ public class TableOfAccountsTest {
 				"	{ " +
 				"	\"email\": \"barry@hotmail.com\", " +
 				"	\"password\": \"kargoth\", " +
+				"   \"cash\": 0," +
 				"	\"primaryKey\": 1," +
 				"    \"monsters\": [{" +
                 " \"dateOfBirth\": 1353345859915, "+
@@ -80,6 +81,7 @@ public class TableOfAccountsTest {
 				"}";
 		TableOfAccounts loaded = new TableOfAccounts().readJSON(data);
 		assertTrue(loaded.lookup("barry@hotmail.com").checkPassword("kargoth"));
+		loaded.lookup("barry@hotmail.com").worth();
 	}
 	
 	@Test

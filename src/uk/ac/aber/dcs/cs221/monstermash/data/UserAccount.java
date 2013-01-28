@@ -24,6 +24,8 @@ public class UserAccount extends java.util.Observable {
 	
 	private volatile List<UserAccount> friends;
 	private volatile List<Offer> offers;
+	
+	private volatile int cash;
 		
 	/**
 	 * Compare a given string with the password on file.
@@ -91,6 +93,7 @@ public class UserAccount extends java.util.Observable {
 		json.put("primaryKey", primaryKey);
 		json.put("email", email);
 		json.put("password", password);
+		json.put("cash", cash);
 		
 		for (Monster monster: monsters) {
 			json.append("monsters", monster.buildJSON() );
@@ -108,6 +111,7 @@ public class UserAccount extends java.util.Observable {
 		primaryKey = json.getLong("primaryKey");
 		email = json.getString("email");
 		password = json.getString("password");
+		cash = json.getInt("cash");
 		
 		JSONArray monsters = json.optJSONArray("monsters");
 		if (monsters != null) {
@@ -186,7 +190,28 @@ public class UserAccount extends java.util.Observable {
 	public synchronized Monster[] getMonsters() {
 		return this.monsters.toArray(new Monster[1]);
 	}
-
+	
+	public synchronized UserAccount setCash(int i) {
+		this.cash = i;
+		return this;
+	}
+	
+	public synchronized int getCash() {
+		return this.cash;
+	}
+	
+	public synchronized UserAccount deductCash(int debt) {
+		this.cash -= debt;
+		return this;
+	}
+	
+	public synchronized int worth() {
+		int accumulator = getCash();
+		for (Monster monster: this.getMonsters() ) {
+			accumulator += monster.worth();
+		}
+		return accumulator;
+	}
 	
 }
 
