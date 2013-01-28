@@ -9,20 +9,66 @@
 <body>
 <div id="login_container">
 	<div id="login_header">
-		<h1>Monster Mash</h1>
 		<div id="login_navigation">
 			<ul>
 			   <li><a class="border" href="home_page.html">Home</a></li>
+			   <li><a class="border" href="friend_requests.html">Friend Requests</a></li>
+			   <li><a class="border" href="breed_requests.html">Breed Requests</a></li>
 			   <li style="float: right; border-left: 1px solid #fff;">
-			   <a href="logout.php">Cash Pile</a></li>
+			   <a href="logout.php">Cash:    </a></li>
 			   <li style="float: right; border-left: 1px solid #fff;">
 			   <a>User Name: 'User Email'</a></li>
 		    </ul>
 		</div>	
 	</div>   
 	<div id="login_content">
-	<h1>Battle Requests</h1>
-	<p>You currently have no battle requests</p>  
+	<img class="page_header" src="battlerequests.png" />
+	<table border="1">
+	   <tr>
+	      <td class = "title_row">
+	      <p>Friend's Name</p>
+	      </td>
+	      <td class = "title_row">
+	      <p>Monster Name</p>
+	      </td>
+	      <td class = "title_row">
+	      <p>Cash Value</p>
+	      </td>
+	      <td class = "title_row">
+	      <p>Select</p>
+	      </td>
+	   </tr>
+	   <form action="">
+	   <tr>
+	      <td class="td_request">
+	      </td>
+	      <td class="td_request">
+	      </td>
+	      <td class="td_request">
+	      </td>
+	      <td class="td_request">
+	         <input type="radio" name="response" value="accept">Accept
+			 <input type="radio" name="response" value="reject">Reject<br /><br />
+			 <input type="submit" value="Submit">
+	      </td>
+	   </tr>
+	   </form>
+	   <form action="">
+	   <tr>
+	      <td class="td_request">
+	      </td>
+	      <td class="td_request">
+	      </td>
+	      <td class="td_request">
+	      </td>
+	      <td class="td_request">
+	         <input type="radio" name="response" value="accept">Accept
+			 <input type="radio" name="response" value="reject">Reject<br /><br />
+			 <input type="submit" value="Submit">
+	      </td>
+	   </tr>
+	   </form>
+    </table>
     </div>
 		<div id="login_footer">
 			<p>Monster Mash &copy; 2012 MonsterMash.com</p> 

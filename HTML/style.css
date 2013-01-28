@@ -1,17 +1,38 @@
 body {
     padding: 0;
     margin: 0;
-    background-image:url('background_image.png');
+    background-image:url('bg_image.jpg');
+    background-size: 100%;
+    background-repeat:no-repeat;
 }
 
-tr {
-    
+table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
 }
 
-td {
-    background-image:url('monster_box.jpg');
+.td_home {
+    background-color: #E0E0E0;
     width: 150px;
     height: 200px; 
+}
+
+.td_request {
+    width: 150px;
+    height: 50px;
+    float: center;
+    text-align: center;
+    background-color: #E0E0E0;
+}
+
+.title_row {
+    background-color: #333;
+    color: #fff;
+}
+
+.page_header {
+    text-align: center;
 }
 
 #container {
@@ -33,10 +54,11 @@ td {
 }
 
 #login_header {
-    padding: 0;
+    padding: 0 auto;
     margin: 10px auto;
 	background: #fff;
 	width: 1000px;
+	height: 217;
 	text-align: center;
 }
 
@@ -59,8 +81,8 @@ td {
 	float: left;
 	width: 1000px;
 	background: #333;
-	padding: 0;
-	margin: 0;
+	padding: 0 auto;
+	margin: 0 auto;
 }
 
 #monsters {
@@ -118,14 +140,21 @@ td {
 {
 	width: 960px;
 	padding: 20px;
-	text-align:left;
-	background: #fff;
+	background: #BAFF75;
 	padding-bottom: 20px;
+	margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    padding-top:50px;
 }
 
-#login_content h1 {
+#table_div {
+    text-align: center;
+}
+
+#table_div p {
     color: #135BA0;
-    size: 8px;
+    size: 4px;
     text-align:center;
 }
 
