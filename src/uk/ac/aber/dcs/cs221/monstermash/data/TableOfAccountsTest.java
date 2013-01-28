@@ -75,7 +75,9 @@ public class TableOfAccountsTest {
                 " \"gender\": \"male\","+
                 " \"fertility\": 0.12582970453416575,"+
                 " \"toughness\": 20,"+
-                " \"injuryChance\": 10"+
+                " \"injuryChance\": 10,"+
+                " \"forSale\": false,"+
+                " \"forTupping\": false"+
             "}]" +
 				"	}] " +
 				"}";

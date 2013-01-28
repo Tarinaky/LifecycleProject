@@ -30,6 +30,9 @@ public class Monster implements Comparable<Monster> {
 	public enum Gender { MALE, FEMALE };
 	private volatile Gender gender;
 	
+	private volatile boolean forTupping = false;
+	private volatile boolean forSale = false;
+	
 	private volatile Date dateOfBirth;
 	
 	protected volatile double ageRate;
@@ -305,6 +308,8 @@ public class Monster implements Comparable<Monster> {
 		json.put("strength", strengthCoefficient);
 		json.put("toughness", toughnessCoefficient);		
 		json.put("primaryKey", getUID() );
+		json.put("forSale", this.forSale);
+		json.put("forTupping", this.forTupping);
 		
 		return json;
 	}
@@ -324,6 +329,9 @@ public class Monster implements Comparable<Monster> {
 		monster.setOwner(owner);
 		monster.strengthCoefficient = json.getInt("strength");
 		monster.toughnessCoefficient = json.getInt("toughness");
+		
+		monster.forTupping = json.optBoolean("forTupping");
+		monster.forSale = json.optBoolean("forSale");
 		
 		return monster;
 		
