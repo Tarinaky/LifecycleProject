@@ -345,5 +345,20 @@ public class Monster implements Comparable<Monster> {
 		accumulator += this.getEvade();
 		return accumulator;
 	}
+	
+	public boolean isForTupping() {
+		return this.forTupping;
+	}
+	public synchronized boolean isForTupping(boolean b) {
+		return this.forTupping = b;
+	}
+	
+	public boolean isForSale() {
+		return this.forSale;
+	}
+	public synchronized boolean isForSale(boolean b) {
+		return this.forSale = b;
+	}
+	
 
 }
