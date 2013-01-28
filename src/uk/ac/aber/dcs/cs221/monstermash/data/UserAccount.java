@@ -25,7 +25,7 @@ public class UserAccount extends java.util.Observable {
 	private volatile List<UserAccount> friends;
 	private volatile List<Offer> offers;
 	
-	private volatile int cash;
+	private volatile int cash=0;
 		
 	/**
 	 * Compare a given string with the password on file.
