@@ -123,12 +123,13 @@ td {
 	padding-bottom: 20px;
 }
 
-#content h1 {
+#login_content h1 {
     color: #135BA0;
     size: 8px;
+    text-align:center;
 }
 
-#content p {
+#login_content p {
     text-align:center;
 }
 
