@@ -1,4 +1,4 @@
-package monstermash.UI.HttpServletPackage;
+package uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage;
 
 import java.io.IOException;
 
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import monstermash.data.TableOfAccounts;
-import monstermash.data.UserAccount;
+import uk.ac.aber.dcs.cs221.monstermash.data.DataSingleton;
+import uk.ac.aber.dcs.cs221.monstermash.data.TableOfAccounts;
+
+
 
 public class LoginController extends HttpServlet{
 	
-	TableOfAccounts accountDb = new TableOfAccounts();
+	TableOfAccounts accountDb = DataSingleton.get();
 	//UserAccount user = new UserAccount(0);
 	
 	protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("Email");
 		String password = req.getParameter("password");
+		String url = "http://localhost:8080/home.jsp";
 		
 		if (accountDb.lookup(email) == null) {
 			resp.getWriter().println("<html>");
@@ -38,7 +41,7 @@ public class LoginController extends HttpServlet{
 		} else {
 			
 			if(accountDb.lookup(email).checkPassword(password)){
-				resp.sendRedirect(getServletName());
+				resp.sendRedirect(url);
 			
 			} else {
 				resp.getWriter().println("<html>");
