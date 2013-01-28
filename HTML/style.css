@@ -9,13 +9,13 @@ body {
 table {
     margin-left: auto;
     margin-right: auto;
-    text-align: left;
+    text-align: center;
 }
 
 .td_home {
     background-color: #E0E0E0;
     width: 150px;
-    height: 200px;
+    height: 250px;
 }
 
 .td_request {
@@ -27,6 +27,7 @@ table {
 }
 
 .title_row {
+    width: 100px;
     background-color: #333;
     color: #fff;
 }
@@ -55,16 +56,6 @@ table {
 	background: #333;
 	padding: 0 auto;
 	margin-top: -4px;
-}
-
-#monsters {
-    float: center; 
-    border:1px solid black;
-    width:150%;
-    height:250px;
-    overflow-y:hidden;
-    overflow-x:scroll;
-    padding: 10px 10px;
 }
 
 #navigation ul {
