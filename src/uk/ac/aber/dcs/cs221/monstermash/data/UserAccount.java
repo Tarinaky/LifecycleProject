@@ -182,6 +182,10 @@ public class UserAccount extends java.util.Observable {
 		
 		return this;
 	}
+	
+	public synchronized Monster[] getMonsters() {
+		return this.monsters.toArray(new Monster[1]);
+	}
 
 	
 }
