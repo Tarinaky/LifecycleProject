@@ -37,23 +37,10 @@ table {
 
 #container {
     margin: auto;
-    width: 500px;
-}
-
-#login_container {
-    margin: auto;
     width: 1000px;
 }
 
 #header {
-    padding: 0;
-    margin: 10px auto;
-	background: #fff;
-	width: 500px;
-	text-align: center;
-}
-
-#login_header {
     padding: 0 auto;
     margin: 10px auto;
 	background: #fff;
@@ -62,22 +49,7 @@ table {
 	text-align: center;
 }
 
-#username {
-    float: right;
-	margin: 0;
-	padding: 0;
-	width: 500px;
-}
-
 #navigation {
-	float: left;
-	width: 500px;
-	background: #333;
-	padding: 0;
-	margin: 0;
-}
-
-#login_navigation {
 	float: left;
 	width: 1000px;
 	background: #333;
@@ -95,17 +67,17 @@ table {
     padding: 10px 10px;
 }
 
-#navigation ul, #login_navigation ul {
+#navigation ul {
 	margin: 0;
 	padding: 0;
 }
 
-#navigation ul li, #login_navigation ul li {
+#navigation ul li {
 	list-style-type: none;
 	display: inline;
 }
 
-#navigation li a, #login_navigation li a {
+#navigation li a {
 	display: block;
 	float: left;
 	padding: 5px 10px;
@@ -114,7 +86,7 @@ table {
 	border-right: 1px solid #fff;
 }
 
-#navigation ul p, #login_navigation ul p {
+#navigation ul p {
     display: block;
     float: right;
     padding: 5px 10px;
@@ -123,21 +95,11 @@ table {
 	border-left: 1px solid #fff;
 }
 
-#navigation li a:hover, #login_navigation li a:hover, a:hover { 
-    background: #5EA319;
+#navigation li a:hover { 
+    background: #00CC00;
 }
 
-#content
-{
-	width: 460px;
-	padding: 20px;
-	text-align:center;
-	background: #fff;
-	padding-bottom: 20px;
-}
-
-#login_content
-{
+#content {
 	width: 960px;
 	padding: 20px;
 	background: #BAFF75;
@@ -158,22 +120,7 @@ table {
     text-align:center;
 }
 
-#login_content p {
-    text-align:center;
-}
-
-#footer
-{
-	width: 500px;
-	background: #333;
-	padding: 0;
-	margin: 0;
-	margin-top: -15px;
-	text-align: center;
-}
-
-#login_footer
-{
+#footer {
 	width: 1000px;
 	background: #333;
 	padding: 0;
@@ -182,7 +129,7 @@ table {
 	text-align: center;
 }
 
-#footer p, #login_footer p {
+#footer p {
     color: #fff;
     padding: 5px 10px;
     
