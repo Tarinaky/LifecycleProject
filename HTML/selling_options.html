@@ -5,6 +5,33 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="style.css" type="text/css" />
 <title> Monster Mash </title>
+<script type="text/javascript">
+function allnumeric(inputtxt)  
+   {  
+      var numbers = /^[0-9]+$/;  
+      if(inputtxt.value.match(numbers))  
+      {  
+      alert('Your Registration number has accepted....');  
+      document.form1.text1.focus();  
+      return true;  
+      }  
+      else  
+      {  
+      alert('Please input numeric characters only');  
+      document.form1.text1.focus();  
+      return false;  
+      }  
+   }   
+function validate(form) {
+    var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    var emailValue = document.forms["details"]["email"].value;
+    if (!email.test(emailValue)) {
+    	alert("Please enter a valid email address");
+        return false;
+    }
+	return true;
+}
+</script>
 </head>
 <body>
 <div id="container">
@@ -44,13 +71,14 @@
 	      <p>Sell</p>
 	      </td>
 	   </tr>
-	   <form action="">
+	   <form id="details" action ="home_page.html" method="post" onsubmit="return validate(this)">
 	   <tr>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
+	      <input type="text" name="amount">
 	      </td>
 	      <td class="td_request">
 	         <input type="radio" name="response" value="yes">Yes
@@ -59,13 +87,14 @@
 	      </td>
 	   </tr>
 	   </form>
-	   <form action="">
+	   <form id="details" action ="home_page.html" method="post" onsubmit="return validate(this)">
 	   <tr>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
+	      <input type="text" name="amount">
 	      </td>
 	      <td class="td_request">
 	         <input type="radio" name="response" value="yes">Yes
