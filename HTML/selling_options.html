@@ -6,31 +6,15 @@
 <link rel="stylesheet" href="style.css" type="text/css" />
 <title> Monster Mash </title>
 <script type="text/javascript">
-function allnumeric(inputtxt)  
-   {  
-      var numbers = /^[0-9]+$/;  
-      if(inputtxt.value.match(numbers))  
-      {  
-      alert('Your Registration number has accepted....');  
-      document.form1.text1.focus();  
-      return true;  
-      }  
-      else  
-      {  
-      alert('Please input numeric characters only');  
-      document.form1.text1.focus();  
+function validate(form) {  
+      var amount = /^[0-9]+$/;  
+      var amountValue = document.forms["details"]["amount"].value;
+      if(!amount.test(amountValue)) {  
+      alert("Please enter a valid cash amount, the amount must be a whole number.");  
       return false;  
       }  
-   }   
-function validate(form) {
-    var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    var emailValue = document.forms["details"]["email"].value;
-    if (!email.test(emailValue)) {
-    	alert("Please enter a valid email address");
-        return false;
-    }
-	return true;
-}
+      return true;
+}   
 </script>
 </head>
 <body>
@@ -71,7 +55,7 @@ function validate(form) {
 	      <p>Sell</p>
 	      </td>
 	   </tr>
-	   <form id="details" action ="home_page.html" method="post" onsubmit="return validate(this)">
+	   <form id="details" action ="" method="post" onsubmit="return validate(this)">
 	   <tr>
 	      <td class="td_request">
 	      </td>
@@ -87,7 +71,7 @@ function validate(form) {
 	      </td>
 	   </tr>
 	   </form>
-	   <form id="details" action ="home_page.html" method="post" onsubmit="return validate(this)">
+	   <form id="details" action ="" method="post" onsubmit="return validate(this)">
 	   <tr>
 	      <td class="td_request">
 	      </td>
