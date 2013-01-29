@@ -41,13 +41,13 @@ public class Battle {
 		monsters[0].evade = challenger.getEvade();
 		monsters[0].toughness = challenger.getToughness();
 		monsters[0].strength = challenger.getStrength();
-		monsters[0].hitpoints = challenger.getToughness();
+		monsters[0].hitpoints = monsters[0].toughness>=1? monsters[0].toughness: 1;
 		monsters[0].name = challenger.getName();
 		
 		monsters[1].evade = defender.getEvade();
 		monsters[1].toughness = defender.getToughness();
 		monsters[1].strength = defender.getStrength();
-		monsters[1].hitpoints = defender.getToughness();
+		monsters[1].hitpoints = monsters[1].toughness>=1? monsters[1].toughness: 1;
 		monsters[1].name = defender.getName();
 		
 		Random prng = new Random();
@@ -66,9 +66,12 @@ public class Battle {
 			int resistance = monsters[defender].toughness>99? 99:
 				monsters[defender].toughness;
 			resistance = (1-resistance);
-			// Calculate random multiplier.
+			// Random multiplier.
 			double multiplier = Math.abs(prng.nextGaussian() );
+			//Calculate damage
 			int damage = (int) (monsters[attacker].strength * resistance * multiplier);
+			//Minimum damage is 1.
+			damage = damage>=1? damage: 1;
 			monsters[defender].hitpoints -= damage;
 			log.add(monsters[attacker].name+" struck "+monsters[defender].name+" for "+damage+" points of damage!");
 			
