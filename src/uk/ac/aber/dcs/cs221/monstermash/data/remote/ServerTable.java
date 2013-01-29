@@ -4,7 +4,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientHandlerException;
+import com.sun.jersey.api.client.UniformInterfaceException;
+import com.sun.jersey.api.client.WebResource;
+
 public class ServerTable {
+	private final static String directory = "http://monstermash.digitdex.com/directory/all"; 
+	
 	private volatile java.util.HashMap<String,Server> servers;
 	
 	public synchronized Server lookup(String name) {
@@ -17,6 +24,15 @@ public class ServerTable {
 			server.readJSON(json.getJSONObject(i));
 			servers.put(server.getName(), server);
 		}
+		
+		return this;
+	}
+	
+	public synchronized ServerTable load() throws UniformInterfaceException, ClientHandlerException, JSONException {
+		Client client = new Client();
+		WebResource r = client.resource(directory);
+		JSONArray json = new JSONArray(r.get(String.class) );
+		this.readJSON(json);
 		
 		return this;
 	}
