@@ -33,6 +33,7 @@ public class Monster implements Comparable<Monster> {
 	
 	private volatile boolean forTupping = false;
 	private volatile boolean forSale = false;
+	private volatile boolean isDead = false;
 	
 	private volatile Date dateOfBirth;
 	
@@ -153,6 +154,9 @@ public class Monster implements Comparable<Monster> {
 	 * @return The monster's health, less than 1. If less than 0 this indicates the monster should be reaped.
 	 */
 	public double getHealth() {
+		if (isDead) {
+			return -1;
+		}
 		return 2 - injuries*0.1 - Math.exp(ageRate * getAge() ); //$2-e^{\lambda t}$
 	}
 	/**
@@ -279,6 +283,7 @@ public class Monster implements Comparable<Monster> {
 	 * Mark this monster for removal from the game (by removing it from the owning UserAccount).
 	 */
 	public synchronized void reap() {
+		this.isDead = true;
 		this.owner.removeMonster(this);
 	}
 	

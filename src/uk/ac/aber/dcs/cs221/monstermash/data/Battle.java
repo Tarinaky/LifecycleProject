@@ -29,6 +29,7 @@ public class Battle {
 	
 	private void fight() {
 		
+		
 		class CombatStats {
 			public int evade,toughness,strength,hitpoints;
 			public String name;
