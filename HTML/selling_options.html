@@ -10,9 +10,9 @@ function validate(form) {
       var amount = /^[0-9]+$/;  
       var amountValue = document.forms["details"]["amount"].value;
       if(!amount.test(amountValue)) {  
-      alert("Please enter a valid cash amount, the amount must be a whole number.");  
+         alert("Please enter a valid cash amount, the amount must be a whole number.");  
       return false;  
-      }  
+      }     
       return true;
 }   
 </script>
@@ -71,14 +71,14 @@ function validate(form) {
 	      </td>
 	   </tr>
 	   </form>
-	   <form id="details" action ="" method="post" onsubmit="return validate(this)">
+	   <form id="details1" action ="" method="post" onsubmit="return validate(this)">
 	   <tr>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
-	      <input type="text" name="amount">
+	      <input type="text" name="amount1">
 	      </td>
 	      <td class="td_request">
 	         <input type="radio" name="response" value="yes">Yes
