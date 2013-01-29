@@ -68,7 +68,7 @@ public class Battle {
 				monsters[defender].toughness;
 			resistance = (100 - resistance)/100;
 			// Random multiplier.
-			double multiplier = 1+Math.abs(prng.nextGaussian());
+			double multiplier = (1+Math.abs(prng.nextGaussian()))/10;
 			//Calculate damage
 			int damage = (int) (monsters[attacker].strength * resistance * multiplier);
 			//Minimum damage is 1.
