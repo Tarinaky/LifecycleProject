@@ -23,12 +23,9 @@ public class Server {
 		return httpAddress;
 	}
 	
-	public synchronized RemoteUser lookup(String email) {
-		return null;// TODO: implement
-	}
 	
 	public synchronized RemoteUser lookup(long uid) {
-		return null;// TODO: Implement
+		// TODO: implement this
 	}
 
 }
