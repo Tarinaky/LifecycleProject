@@ -1,0 +1,35 @@
+{
+    "users": [
+        {
+            "email": "byebye8@outlook.co.uk",
+            "primaryKey": 4,
+            "cash": 0,
+            "password": "test4"
+        },
+        {
+            "email": "ck2@aol.co.uk",
+            "primaryKey": 3,
+            "cash": 0,
+            "password": "test3"
+        },
+        {
+            "email": "hello1.gmail.com",
+            "primaryKey": 1,
+            "cash": 0,
+            "password": "test1"
+        },
+        {
+            "email": "wonkado27@live.co.uk",
+            "primaryKey": 5,
+            "cash": 0,
+            "password": "test5"
+        },
+        {
+            "email": "james23@hotmail.com",
+            "primaryKey": 2,
+            "cash": 0,
+            "password": "test2"
+        }
+    ],
+    "nextAccountKey": 6
+}
