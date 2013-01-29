@@ -1,89 +1,74 @@
 body {
     padding: 0;
     margin: 0;
-    background-image:url('background_image.png');
+    background-image:url('bg_image.jpg');
+    background-size: 100%;
+    background-repeat:no-repeat;
 }
 
-tr {
-    
+table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
-td {
-    background-image:url('monster_box.jpg');
+.td_home {
+    background-color: #E0E0E0;
     width: 150px;
-    height: 200px; 
+    height: 250px;
+}
+
+.td_request {
+    width: 150px;
+    height: 50px;
+    float: center;
+    text-align: center;
+    background-color: #E0E0E0;
+}
+
+.title_row {
+    width: 100px;
+    background-color: #333;
+    color: #fff;
+}
+
+.page_header {
+    text-align: center;
 }
 
 #container {
-    margin: auto;
-    width: 500px;
-}
-
-#login_container {
     margin: auto;
     width: 1000px;
 }
 
 #header {
-    padding: 0;
-    margin: 10px auto;
-	background: #fff;
-	width: 500px;
-	text-align: center;
-}
-
-#login_header {
-    padding: 0;
+    padding: 0 auto;
     margin: 10px auto;
 	background: #fff;
 	width: 1000px;
+	height: 217;
 	text-align: center;
-}
-
-#username {
-    float: right;
-	margin: 0;
-	padding: 0;
-	width: 500px;
 }
 
 #navigation {
 	float: left;
-	width: 500px;
-	background: #333;
-	padding: 0;
-	margin: 0;
-}
-
-#login_navigation {
-	float: left;
 	width: 1000px;
 	background: #333;
-	padding: 0;
-	margin: 0;
+	padding: 0 auto;
+	margin-top: -4px;
 }
 
-#monsters {
-    float: center; 
-    border:1px solid black;
-    width:150%;
-    height:250px;
-    overflow-y:hidden;
-    overflow-x:scroll;
-    padding: 10px 10px;
-}
-
-#navigation ul, #login_navigation ul {
+#navigation ul {
 	margin: 0;
 	padding: 0;
 }
 
-#navigation ul li, #login_navigation ul li {
+#navigation ul li {
 	list-style-type: none;
 	display: inline;
 }
 
-#navigation li a, #login_navigation li a {
+#navigation li a {
 	display: block;
 	float: left;
 	padding: 5px 10px;
@@ -92,7 +77,7 @@ td {
 	border-right: 1px solid #fff;
 }
 
-#navigation ul p, #login_navigation ul p {
+#navigation ul p {
     display: block;
     float: right;
     padding: 5px 10px;
@@ -101,50 +86,32 @@ td {
 	border-left: 1px solid #fff;
 }
 
-#navigation li a:hover, #login_navigation li a:hover, a:hover { 
-    background: #135BA0; 
+#navigation li a:hover { 
+    background: #00CC00;
 }
 
-#content
-{
-	width: 460px;
-	padding: 20px;
-	text-align:center;
-	background: #fff;
-	padding-bottom: 20px;
-}
-
-#login_content
-{
+#content {
 	width: 960px;
 	padding: 20px;
-	text-align:left;
-	background: #fff;
+	background: #BAFF75;
 	padding-bottom: 20px;
+	margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    padding-top:50px;
 }
 
-#login_content h1 {
+#table_div {
+    text-align: center;
+}
+
+#table_div p {
     color: #135BA0;
-    size: 8px;
+    size: 4px;
     text-align:center;
 }
 
-#login_content p {
-    text-align:center;
-}
-
-#footer
-{
-	width: 500px;
-	background: #333;
-	padding: 0;
-	margin: 0;
-	margin-top: -15px;
-	text-align: center;
-}
-
-#login_footer
-{
+#footer {
 	width: 1000px;
 	background: #333;
 	padding: 0;
@@ -153,7 +120,7 @@ td {
 	text-align: center;
 }
 
-#footer p, #login_footer p {
+#footer p {
     color: #fff;
     padding: 5px 10px;
     
