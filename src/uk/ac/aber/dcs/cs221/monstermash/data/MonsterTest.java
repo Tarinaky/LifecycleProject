@@ -44,14 +44,6 @@ public class MonsterTest extends TestCase {
 	}
 
 	@Test
-	public void testSetGender() {
-		monster.setGender(Monster.Gender.MALE);
-		assertTrue(monster.isMale() );
-		monster.setGender(Monster.Gender.FEMALE);
-		assertFalse(monster.isMale() );
-	}
-
-	@Test
 	public void testMutation() {
 		java.util.Random rand = new java.util.Random();
 		for (int i=0; i < 100; ++i) {

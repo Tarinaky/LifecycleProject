@@ -28,9 +28,6 @@ public class Monster implements Comparable<Monster> {
 	
 	private volatile String name;
 	
-	public enum Gender { MALE, FEMALE };
-	private volatile Gender gender;
-	
 	private volatile boolean forTupping = false;
 	private volatile boolean forSale = false;
 	private volatile boolean isDead = false;
@@ -131,15 +128,11 @@ public class Monster implements Comparable<Monster> {
 	 * @param gender The monster's gender.
 	 * @return This monster object.
 	 */
-	public synchronized Monster setGender(Gender gender) {
-		this.gender = gender; 
-		this.setName((this.isMale() ) ? nameGen.male(new java.util.Random() ): nameGen.female(new java.util.Random() ) );
-		return this; }
-	/**
-	 * 
- 	 * @return True iff this monster is male.
-	 */
-	public boolean isMale() { return (gender == Gender.MALE); }
+	public synchronized Monster setName() {
+		Random prng = new Random(); 
+		this.setName((prng.nextBoolean() ) ? nameGen.male(prng): nameGen.female(prng) );
+		return this; 
+	}
 	/**
 	 * 
 	 * @return The monster's age in seconds.
@@ -209,7 +202,7 @@ public class Monster implements Comparable<Monster> {
 		Monster monster = new Monster();
 		java.util.Random rand = new java.util.Random();
 		
-		monster.setGender((rand.nextBoolean() ) ? Gender.MALE: Gender.FEMALE);
+		monster.setName();
 		
 		
 		
@@ -251,7 +244,7 @@ public class Monster implements Comparable<Monster> {
 		while (returnedChildren.size() < numChildren) {
 			Monster monster = new Monster();
 			
-			monster.setGender((rand.nextBoolean()) ? Gender.MALE: Gender.FEMALE);
+			monster.setName();
 			monster.setOwner(this.getOwner() );
 			
 			monster.ageRate = crossover(rand, this.ageRate, father.ageRate);
@@ -308,7 +301,6 @@ public class Monster implements Comparable<Monster> {
 		json.put("dateOfBirth", dateOfBirth.getTime() );
 		json.put("evade", evadeCoefficient);
 		json.put("fertility", fertility);
-		json.put("gender", (isMale() ) ? "male": "female" );
 		json.put("injuries", injuries);
 		json.put("injuryChance", injuryChance);
 		json.put("name", name);
@@ -330,7 +322,6 @@ public class Monster implements Comparable<Monster> {
 		monster.dateOfBirth = new Date(json.getLong("dateOfBirth") );
 		monster.evadeCoefficient = json.getInt("evade");
 		monster.fertility = json.getDouble("fertility");
-		monster.gender = (json.getString("gender").equals("male")) ? Gender.MALE: Gender.FEMALE;
 		monster.injuries = json.getInt("injuries");
 		monster.injuryChance = json.getInt("injuryChance");
 		monster.name = json.getString("name");
