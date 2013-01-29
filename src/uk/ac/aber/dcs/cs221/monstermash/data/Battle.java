@@ -63,11 +63,11 @@ public class Battle {
 				continue;//The attack misses.
 			}
 			// Calculate damage reduction from Toughness.
-			int resistance = monsters[defender].toughness>99? 99:
+			double resistance = monsters[defender].toughness>99? 99:
 				monsters[defender].toughness;
-			resistance = (1-resistance);
+			resistance = (100 - resistance)/100;
 			// Random multiplier.
-			double multiplier = Math.abs(prng.nextGaussian() );
+			double multiplier = 1+Math.abs(prng.nextGaussian());
 			//Calculate damage
 			int damage = (int) (monsters[attacker].strength * resistance * multiplier);
 			//Minimum damage is 1.

@@ -210,12 +210,12 @@ public class Monster implements Comparable<Monster> {
 		
 		
 		monster.ageRate = mutation(rand) * 1.6e-6f;
-		monster.strengthCoefficient = (int) (mutation(rand) * 50);
-		monster.toughnessCoefficient = (int) (mutation(rand) * 50);
-		monster.evadeCoefficient = (int) (mutation(rand) * 50);
+		monster.strengthCoefficient = (int) (mutation(rand) * 500);
+		monster.toughnessCoefficient = (int) (mutation(rand) * 500);
+		monster.evadeCoefficient = (int) (mutation(rand) * 500);
 		
 		monster.fertility =  Math.abs(rand.nextDouble() );
-		monster.injuryChance = (int) (mutation(rand) * 20);
+		monster.injuryChance = (int) (mutation(rand) * 200);
 		
 		return monster;
 		

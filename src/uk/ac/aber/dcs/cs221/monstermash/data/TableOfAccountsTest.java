@@ -122,8 +122,14 @@ public class TableOfAccountsTest {
 		Monster monsterA = Monster.generateRandom();
 		Monster monsterB = Monster.generateRandom();
 		
-		monsterA.setOwner(a);
-		monsterB.setOwner(b);
+		monsterA.setOwner(a).ageCheat(5*1000*60);
+		monsterB.setOwner(b).ageCheat(5*1000*60);
+		System.out.println(monsterA);
+		System.out.println("Health: "+monsterA.getHealth());
+		System.out.println("Strength: "+monsterA.getStrength());
+		System.out.println("Toughness: "+monsterA.getToughness());
+		System.out.println("Evade: "+monsterA.getEvade());
+		
 		
 		Offer battleOffer = new BattleOffer()
 			.setChallenger(monsterA)
