@@ -5,6 +5,33 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="style.css" type="text/css" />
 <title> Monster Mash </title>
+<script type="text/javascript">
+function allnumeric(inputtxt)  
+   {  
+      var numbers = /^[0-9]+$/;  
+      if(inputtxt.value.match(numbers))  
+      {  
+      alert('Your Registration number has accepted....');  
+      document.form1.text1.focus();  
+      return true;  
+      }  
+      else  
+      {  
+      alert('Please input numeric characters only');  
+      document.form1.text1.focus();  
+      return false;  
+      }  
+   }   
+function validate(form) {
+    var email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    var emailValue = document.forms["details"]["email"].value;
+    if (!email.test(emailValue)) {
+    	alert("Please enter a valid email address");
+        return false;
+    }
+	return true;
+}
+</script>
 </head>
 <body>
 <div id="container">
@@ -14,7 +41,9 @@
 			<ul>
 			   <li><a class="border" href="home_page.html">Home</a></li>
 			   <li><a class="border" href="friend_requests.html">Friend Requests</a></li>
+			   <li><a class="border" href="breed_options.html">Breed Options</a></li>
 			   <li><a class="border" href="battle_requests.html">Battle Requests</a></li>
+			   <li><a class="border" href="selling_options.html">Selling Options</a></li>
 			   <li style="float: right; border-left: 1px solid #fff;">
 			   <li style="float: right; border-left: 1px solid #fff;">
 			   <a href="login.html">Logout</a></li>
@@ -26,12 +55,9 @@
 		</div>	
 	</div>   
 	<div id="content">
-	<img class="page_header" src="breedrequests.png" />
+	<img class="page_header" src="sellingoptions.png" />
 	<table border="1">
 	   <tr>
-	      <td class = "title_row">
-	      <p>Friend's Name</p>
-	      </td>
 	      <td class = "title_row">
 	      <p>Monster Name</p>
 	      </td>
@@ -42,40 +68,38 @@
 	      <p>Cash Value</p>
 	      </td>
 	      <td class = "title_row">
-	      <p>Select</p>
+	      <p>Sell</p>
 	      </td>
 	   </tr>
-	   <form action="">
+	   <form id="details" action ="home_page.html" method="post" onsubmit="return validate(this)">
 	   <tr>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
+	      <input type="text" name="amount">
 	      </td>
 	      <td class="td_request">
-	      </td>
-	      <td class="td_request">
-	         <input type="radio" name="response" value="accept">Accept
-			 <input type="radio" name="response" value="reject">Reject<br /><br />
-			 <input type="submit" value="Submit">
+	         <input type="radio" name="response" value="yes">Yes
+			 <input type="radio" name="response" value="no">No<br /><br />
+			 <input type="submit" value="Apply">
 	      </td>
 	   </tr>
 	   </form>
-	   <form action="">
+	   <form id="details" action ="home_page.html" method="post" onsubmit="return validate(this)">
 	   <tr>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
 	      </td>
 	      <td class="td_request">
+	      <input type="text" name="amount">
 	      </td>
 	      <td class="td_request">
-	      </td>
-	      <td class="td_request">
-	         <input type="radio" name="response" value="accept">Accept
-			 <input type="radio" name="response" value="reject">Reject<br /><br />
-			 <input type="submit" value="Submit">
+	         <input type="radio" name="response" value="yes">Yes
+			 <input type="radio" name="response" value="no">No<br /><br />
+			 <input type="submit" value="Apply">
 	      </td>
 	   </tr>
 	   </form>
