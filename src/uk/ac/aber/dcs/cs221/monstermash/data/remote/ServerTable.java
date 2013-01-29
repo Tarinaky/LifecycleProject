@@ -14,7 +14,7 @@ public class ServerTable {
 	public synchronized ServerTable readJSON(JSONArray json) throws JSONException {
 		for (int i = 0; i < json.length(); ++i) {
 			Server server = new Server();
-			server.readJSON(json.get(i));
+			server.readJSON(json.getJSONObject(i));
 			servers.put(server.getName(), server);
 		}
 		

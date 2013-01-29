@@ -1,24 +1,34 @@
 package uk.ac.aber.dcs.cs221.monstermash.data.remote;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Server {
 
 	private volatile String httpAddress;
 	private volatile String serverName;
 	
 	
-	public void readJSON(Object object) {
-		// TODO Auto-generated method stub
-		
+	public Server readJSON(JSONObject json) throws JSONException {
+		serverName = "Group"+json.getInt("serverNumber");
+		httpAddress = json.getString("httpRoot");
+		return this;		
 	}
 
 	public synchronized String getName() {
-		// TODO Auto-generated method stub
 		return serverName;
 	}
 	
-	public synchronized Server setName(String s) {
-		this.serverName = s;
-		return this;
+	public synchronized String getAddress() {
+		return httpAddress;
+	}
+	
+	public synchronized RemoteUser lookup(String email) {
+		return null;// TODO: implement
+	}
+	
+	public synchronized RemoteUser lookup(long uid) {
+		return null;// TODO: Implement
 	}
 
 }
