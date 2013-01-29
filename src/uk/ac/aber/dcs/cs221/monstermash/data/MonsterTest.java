@@ -70,6 +70,15 @@ public class MonsterTest extends TestCase {
 		
 		assertTrue(monster.getHealth() > 0);
 	}
+	
+	@Test
+	public void testDead() {
+		Monster monster = Monster.generateRandom().ageCheat(1000000);
+		System.out.println("Monster health: "+monster.getHealth() );
+		assertTrue(monster.getHealth() < 0);
+		monster.reap();
+		assertTrue(monster.getHealth() <0);
+	}
 
 	@Test
 	public void testBreed() throws JSONException {

@@ -284,7 +284,9 @@ public class Monster implements Comparable<Monster> {
 	 */
 	public synchronized void reap() {
 		this.isDead = true;
-		this.owner.removeMonster(this);
+		if (this.owner != null) { 
+			this.owner.removeMonster(this);
+		}
 	}
 	
 	@Override
