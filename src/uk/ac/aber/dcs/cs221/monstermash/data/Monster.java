@@ -209,7 +209,7 @@ public class Monster implements Comparable<Monster> {
 		
 		
 		
-		monster.ageRate = mutation(rand) * 1.5e-3f;
+		monster.ageRate = mutation(rand) * 1.6e-6f;
 		monster.strengthCoefficient = (int) (mutation(rand) * 50);
 		monster.toughnessCoefficient = (int) (mutation(rand) * 50);
 		monster.evadeCoefficient = (int) (mutation(rand) * 50);
@@ -365,9 +365,17 @@ public class Monster implements Comparable<Monster> {
 		if (prng.nextInt() % 100 < this.injuryChance) {
 			this.injuries += 1;
 		}
-		
-		
 	}
+		
+	public synchronized Monster ageCheat(long time) {
+		long instantOfBirth = dateOfBirth.getTime();
+		instantOfBirth -= time;
+		dateOfBirth = new Date(instantOfBirth);
+		return this;		
+	}
+		
+		
+	
 	
 
 }
