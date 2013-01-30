@@ -32,7 +32,7 @@ public class Monster implements Comparable<Monster> {
 	private volatile boolean forSale = false;
 	private volatile boolean isDead = false;
 	
-	private volatile Date dateOfBirth;
+	protected volatile Date dateOfBirth;
 	
 	protected volatile double ageRate;
 	protected volatile int strengthCoefficient;
@@ -47,6 +47,10 @@ public class Monster implements Comparable<Monster> {
 	protected static Name nameGen;
 	
 	private volatile int injuries;
+
+	private volatile int tuppingPrice = 0;
+
+	private volatile int salePrice = 0;
 	
 	public synchronized static void init(long nextPrimaryKey) {
 		Monster.nextPrimaryKey = nextPrimaryKey;
@@ -351,6 +355,24 @@ public class Monster implements Comparable<Monster> {
 	public synchronized boolean isForTupping(boolean b) {
 		return this.forTupping = b;
 	}
+	
+	public synchronized Monster setTuppingPrice(int i) {
+		this.tuppingPrice = i;
+		return this;
+	}
+	public synchronized int getTuppingPrice() {
+		return this.tuppingPrice;
+	}
+	
+	public synchronized Monster setSalePrice(int i) {
+		this.salePrice = i;
+		return this;
+	}
+	
+	public synchronized int getSalePrice() {
+		return this.salePrice;
+	}
+	
 	
 	public boolean isForSale() {
 		return this.forSale;
