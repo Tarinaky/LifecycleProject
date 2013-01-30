@@ -5,8 +5,11 @@ import org.json.JSONObject;
 
 public class Server {
 
-	private volatile String httpAddress;
-	private volatile String serverName;
+	private volatile String httpAddress="NoName";
+	private volatile String serverName="NoAddress";
+	
+	public Server() {
+	}
 	
 	
 	public Server readJSON(JSONObject json) throws JSONException {
