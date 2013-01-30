@@ -73,7 +73,11 @@ public class FriendPage extends HttpServlet{
 		response.getWriter().println("</tr>");
 		response.getWriter().println("</table>");
 		response.getWriter().println("<div style=\"float: center; border:1px solid black;width:960px;height:250px;overflow-y:hidden;overflow-x:scroll;margin: 10px auto\">");
-		
+		response.getWriter().println("<table style=\"width: 150%\">");
+		response.getWriter().println("<tr>");
+		response.getWriter().println("<from action=\"\">");
+		response.getWriter().println("<td class = td_home width =\"180px\";>");
+		response.getWriter().println();
 	}
 	
 }
