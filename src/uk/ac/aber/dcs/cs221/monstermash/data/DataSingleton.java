@@ -13,7 +13,7 @@ public class DataSingleton {
 	
 	static volatile TableOfAccounts instance = null;
 	final static String dataPath = "monstermash_data_persistance.json";
-	final static int serialisationPeriod = 60000;//One minute in miliseconds.
+	final static int serialisationPeriod = 60000;//One minute in milliseconds.
 	
 	public static synchronized TableOfAccounts get() {
 		if (instance == null) {
