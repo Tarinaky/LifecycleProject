@@ -44,26 +44,27 @@ public class Homepage extends HttpServlet {
 		response.getWriter().println("<ul>");
 		
 		response.getWriter().println("<li><a class=\"border\"> Home </a></li>");
-		response.sendRedirect("http://localhost:8080/Homepage");
+		//response.sendRedirect("http://localhost:8080/Homepage");
 		
 		response.getWriter().println("<li><a class=\"border\"> Friend Request </a></li>");
-		response.sendRedirect("http://localhost:8080/FriendPage");
+		//response.sendRedirect("http://localhost:8080/FriendPage");
 		
 		response.getWriter().println("<li><a class=\"border\">Breed Options</li>");
-		response.sendRedirect("http://localhost:8080/BreedOptions");
+		//response.sendRedirect("http://localhost:8080/BreedOptions");
 		
 		response.getWriter().println("<li><a class=\"border\">Selling Option</a></li>");
-		response.sendRedirect("http://localhost:8080/SellingOptions");
+		//response.sendRedirect("http://localhost:8080/SellingOptions");
 		
 		response.getWriter().println("<li><a class=\border\"> Battle Requests</a></li>");
-		response.sendRedirect("http://localhost:8080/BattleRequests");
+		//response.sendRedirect("http://localhost:8080/BattleRequests");
 		
 		response.getWriter().println("<li style=\"float: right; border-left: 1px solid #fff;");
 		response.getWriter().println("<a>Logout</a></li>");
 		response.getWriter().println("<li style=\"float: right; border-left: 1px solid #fff;\">");
-		response.getWriter().println("<a>Cash:" + LoginController.user.getCash() + "</a></li>");
+		//jacob help plz
+		//response.getWriter().println("<a>Cash:" + LoginController.user.getCash() + "</a></li>");
 		response.getWriter().println("<li style=\"float: right; border-left: 1px solid #fff;");
-		response.getWriter().println("<a>User Name" + LoginController.user.getEmail() + "</a></li>");		
+		//response.getWriter().println("<a>User Name" + LoginController.user.getEmail() + "</a></li>");		
 		response.getWriter().println("</ul>");
 		response.getWriter().println("</div>");
 		response.getWriter().println("</div>");
@@ -73,7 +74,7 @@ public class Homepage extends HttpServlet {
 		response.getWriter().println("<table style=\"width: 150%\"");
 		response.getWriter().println("<tr>");
 		response.getWriter().println("td class = tr_home width =\"180px\";>");
-		response.getWriter().println("<h3>" + LoginController.user.getMonsters() + "</h3>");
+		//response.getWriter().println("<h3>" + LoginController.user.getMonsters() + "</h3>");
 		response.getWriter().println("<p>Attributes</p>");
 		//some more monster stuff here...
 		response.getWriter().println("</td>");
@@ -106,7 +107,7 @@ public class Homepage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
