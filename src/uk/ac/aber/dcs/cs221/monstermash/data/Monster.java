@@ -71,7 +71,7 @@ public class Monster implements Comparable<Monster> {
 		injuries = 0;
 	}
 	/**
-	 * Construct an uninitialise Monster with a particular primaryKey.
+	 * Construct an uninitialised Monster with a particular primaryKey.
 	 * @param primaryKey
 	 */
 	protected Monster(long primaryKey) {
@@ -124,8 +124,8 @@ public class Monster implements Comparable<Monster> {
 	
 	/**
 	 * Sets the monster's gender and immediately gives the monster a random
-	 * gender appropriate name. {@link #Gender}
-	 * @param gender The monster's gender.
+	 * name.
+	 * @param gender The name of the monster (randomised to be a female or male name even though gender not implemented).
 	 * @return This monster object.
 	 */
 	public synchronized Monster setName() {
