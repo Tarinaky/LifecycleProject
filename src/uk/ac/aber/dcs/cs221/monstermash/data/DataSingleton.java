@@ -19,12 +19,9 @@ import uk.ac.aber.dcs.cs221.monstermash.data.remote.ServerTable;
 public class DataSingleton {
 	
 	static volatile TableOfAccounts instance = null;
-	static volatile ServerTable remote = null;
-	
+	static volatile ServerTable remote = null;	
 	final static String dataPath = "monstermash_data_persistance.json";
-	final static int serialisationPeriod = 60000;//One minute in milliseconds.
-	
-	
+	final static int serialisationPeriod = 60000;//One minute in milliseconds.	
 	
 	public static synchronized TableOfAccounts get() {
 		if (instance == null) {
@@ -51,22 +48,21 @@ public class DataSingleton {
 				System.err.println("Could not parse file "+dataPath+".");
 			}
 			
-			//Serialise on exit.
+			//Serialize on exit.
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 				public void run() {
 					DataSingleton.save();
 				}
 			}));
 			
-			//Serialise periodically.
+			//Serialize periodically.
 			java.util.Timer timer = new java.util.Timer();
 			TimerTask periodicSerialisation = new TimerTask() {
 				public void run() {
 					DataSingleton.save();
 				}
 			};
-			timer.schedule(periodicSerialisation, serialisationPeriod);
-			
+			timer.schedule(periodicSerialisation, serialisationPeriod);	
 			
 		}
 		return instance;
@@ -98,10 +94,8 @@ public class DataSingleton {
 			} catch (Exception e) {
 				System.out.println("Could not reach server directory.");
 				e.printStackTrace();
-			}
-			
+			}		
 		}
 		return remote;
-
 	}
 }
