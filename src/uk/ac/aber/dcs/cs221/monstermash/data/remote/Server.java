@@ -25,6 +25,7 @@ public class Server {
 	
 	
 	public synchronized RemoteUser lookup(long uid) {
+		return null;
 		// TODO: implement this
 	}
 
