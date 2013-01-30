@@ -28,20 +28,6 @@ public class DataSingleton {
 		if (instance == null) {
 			instance = new TableOfAccounts();//Initialise
 			
-			//Load remote server directory.
-			try {
-				remote = new ServerTable().load();
-			} catch (UniformInterfaceException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (ClientHandlerException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
 			//Try to load from file.
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(dataPath));
@@ -100,5 +86,20 @@ public class DataSingleton {
 			System.err.println("Failed to build JSON expression for data.");
 		}
 	}
+	
+	public static synchronized ServerTable getRemotes() {
+		
+		//Load remote server directory.
+		if (remote == null) {
+			try {
+				remote = new ServerTable().load();
+			} catch (Exception e) {
+				System.out.println("Could not reach server directory.");
+				e.printStackTrace();
+			}
+			
+		}
+		return remote;
 
+	}
 }
