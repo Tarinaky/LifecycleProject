@@ -14,14 +14,33 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
  
  <servlet>   
    <servlet-name>LoginController</servlet-name>
-   <servlet-class>monstermash.UI.HttpServletPackage.LoginController</servlet-class>
-   
+   <servlet-class>uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage.LoginController</servlet-class>   
  </servlet>
  
+ <servlet>
+ 	<servlet-name>Register</servlet-name>
+ 	<servlet-class>uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage.Register</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<servlet-name>Homepage</servlet-name>
+ 	<servlet-class>uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage.Homepage</servlet-class>
+ </servlet>
  <servlet-mapping>
    <servlet-name>LoginController</servlet-name>
    <url-pattern>/LoginController</url-pattern>
  </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>Register</servlet-name>
+ 	<url-pattern>/Register</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>Homepage</servlet-name>
+ 	<url-pattern>/Homepage</url-pattern>	
+ </servlet-mapping>
+ 
  
 
  
