@@ -1,5 +1,6 @@
 package uk.ac.aber.dcs.cs221.monstermash.data.remote;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +16,7 @@ public class Server {
 	
 	private volatile Client client;
 	private final static String userLookup = "/users?userID=";
+	private final static String monstersByUser = "/monsters?userID=";
 	
 	public Server() {
 		client = new Client();
@@ -36,10 +38,19 @@ public class Server {
 	}
 	
 	
-	public synchronized RemoteUser lookup(String uid) throws UniformInterfaceException, ClientHandlerException, JSONException {
-		WebResource r = client.resource(getAddress() + userLookup +uid);
+	public synchronized RemoteUser lookupUser(String uid) throws UniformInterfaceException, ClientHandlerException, JSONException {
+		WebResource r;
+		r = client.resource(getAddress() + userLookup +uid);
 		JSONObject json = new JSONObject(r.get(String.class) );
 		RemoteUser user = new RemoteUser().readJSON(json);
+		
+		//Add monsters.
+		r = client.resource(getAddress() + monstersByUser + uid);
+		JSONArray monsters = new JSONArray(r.get(String.class) );
+		for (int i = 0; i < monsters.length(); ++i) {
+			new RemoteMonster().readJSON(monsters.getJSONObject(i), user);
+		}
+		
 		return user;
 	}
 
