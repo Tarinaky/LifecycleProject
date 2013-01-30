@@ -19,7 +19,7 @@ public class LoginController extends HttpServlet{
 	
 	protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String email = req.getParameter("Email");
+		String email = req.getParameter("userName");
 		String password = req.getParameter("password");
 		String url = "http://localhost:8080/Monster_Mash/Homepage";
 		
@@ -50,7 +50,10 @@ public class LoginController extends HttpServlet{
 			
 			if(accountDb.lookup(email).checkPassword(password)){
 				user = accountDb.lookup(email);
-				resp.sendRedirect(url);			
+				resp.getWriter().println("<form action=\"Homepage\" method=\"get\">");
+				resp.getWriter().println("<h3>Redirect</h3>");
+				resp.getWriter().println("<input type=\"submit\" value=\"Redirect\">");
+				//resp.sendRedirect("http://localhost8080:/Monster_Mash/Homepage");
 			
 			} else {
 				resp.getWriter().println("<html>");

@@ -1,11 +1,14 @@
 package uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONException;
 
 import uk.ac.aber.dcs.cs221.monstermash.data.DataSingleton;
 import uk.ac.aber.dcs.cs221.monstermash.data.TableOfAccounts;
@@ -20,14 +23,21 @@ public class Register extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)throws IOException, ServletException {
 		
-		String email = req.getParameter("Name");
-		String password = req.getParameter("Password");
-		String repassword = req.getParameter("Repassword");
-		String url = "http://localhost:8080/login.jsp";
-		
-		if ( password == repassword && password != null && repassword != null) {
-			db.addUser(email);			
+		String email = req.getParameter("userName");
+		String password = req.getParameter("password");
+		String repassword = req.getParameter("pasword");
+				
+		if ( password.equals(repassword) ) {
+			resp.getWriter().println("If statement entered...");	
+			//db.addUser(email);
 			db.addUser(email).setPassword(repassword);
+			try {
+				db.buildJSON();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//db.addUser(email);
 			
 			resp.getWriter().println("<html>");
 			resp.getWriter().println("<head>");
@@ -40,8 +50,7 @@ public class Register extends HttpServlet{
 			resp.getWriter().println("</html>");
 			
 			resp.sendRedirect("http://localhost:8080/Monster_Mash/login.jsp");
-			
-			
+						
 		} else {
 			
 			resp.getWriter().println("<html>");
