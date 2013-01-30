@@ -1,11 +1,14 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
-import java.util.ArrayList;
-import java.util.Collection;
+/**
+ * Hashtable of users with relating methods.
+ * @author Jacob Smith, jas32
+ *
+ */
+
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -16,7 +19,6 @@ import org.json.JSONException;
  */
 public class TableOfAccounts implements Observer {
 	private volatile long nextAccountKey;
-	
 	private volatile HashMap<String,UserAccount> accountsByEmail;
 	private volatile HashMap<Long,UserAccount> accountsByUID;
 
@@ -77,17 +79,15 @@ public class TableOfAccounts implements Observer {
 			json.append("users",account.buildJSON() );
 			
 		}
-		
-		
-		
+			
 		return json;
 	}
 	
 	/**
-	 * Deserialises an object from a JSON expression.
-	 * TODO: Allow deserialisation from a Reader object
+	 * Deserializes an object from a JSON expression.
+	 * TODO: Allow deserialization from a Reader object
 	 * @param expression A valid JSON object.
-	 * @return The deserialised object.
+	 * @return The deserialized object.
 	 * @throws JSONException
 	 */
 	public synchronized TableOfAccounts readJSON(String expression) throws JSONException {
@@ -106,11 +106,6 @@ public class TableOfAccounts implements Observer {
 			account.addObserver(this);
 		}
 		
-		
-		
 		return this;
 	}
-	
-
-	
 }

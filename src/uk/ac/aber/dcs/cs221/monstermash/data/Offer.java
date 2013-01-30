@@ -1,5 +1,11 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
+/**
+ * Abstract class that all offer classes inherit.
+ * @author Jacob Smith, jas32
+ *
+ */
+
 public abstract class Offer {
 	
 	private volatile UserAccount source;

@@ -1,55 +1,38 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Observable;
-import java.util.Random;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
-import uk.ac.aber.dcs.cs221.monstermash.util.Name;
-
 /**
- * 
+ * Defines the attributes of a monster along with relevant functions to handle them.
  * @author Jacob Smith, jas32
  *
  */
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
+import org.json.JSONException;
+import org.json.JSONObject;
+import uk.ac.aber.dcs.cs221.monstermash.util.Name;
+
 public class Monster implements Comparable<Monster> {
-	public static final int MAX_NUM_CHILDREN = 10;
-	
+	public static final int MAX_NUM_CHILDREN = 10;	
 	private static volatile long nextPrimaryKey = 1;
 	private static volatile boolean isInit = false;
-	
-	private volatile long primaryKey;
-	
-	private volatile UserAccount owner;
-	
-	private volatile String name;
-	
+	private volatile long primaryKey;	
+	private volatile UserAccount owner;	
+	private volatile String name;	
 	private volatile boolean forTupping = false;
 	private volatile boolean forSale = false;
 	private volatile boolean isDead = false;
-	
 	protected volatile Date dateOfBirth;
-	
 	protected volatile double ageRate;
 	protected volatile int strengthCoefficient;
 	protected volatile int evadeCoefficient;
 	protected volatile int toughnessCoefficient;
-	
 	protected volatile double fertility;
-	
-	
 	protected volatile int injuryChance;
-	
 	protected static Name nameGen;
-	
 	private volatile int injuries;
-
 	private volatile int tuppingPrice = 0;
-
 	private volatile int salePrice = 0;
 	
 	public synchronized static void init(long nextPrimaryKey) {

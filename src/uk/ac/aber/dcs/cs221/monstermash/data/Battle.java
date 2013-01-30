@@ -1,5 +1,11 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
+/**
+ * Represents a battle which has been fought.
+ * @author Jacob Smith, jas32
+ *
+ */
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;

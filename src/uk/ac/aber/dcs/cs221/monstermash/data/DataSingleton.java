@@ -1,17 +1,19 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
+/**
+ * Provides a singleton interface to TableOfAccounts and ServerTable.
+ * Automatically serialises TableOfAccounts periodically.
+ * @author Jacob Smith, jas32
+ *
+ */
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.TimerTask;
-
 import org.json.JSONException;
-
-import com.sun.jersey.api.client.ClientHandlerException;
-import com.sun.jersey.api.client.UniformInterfaceException;
-
 import uk.ac.aber.dcs.cs221.monstermash.data.remote.ServerTable;
 
 public class DataSingleton {
