@@ -61,7 +61,7 @@ public class Monster implements Comparable<Monster> {
 	 */
 	public Monster() {
 		synchronized (getClass() ) {
-			if (isInit == false) { throw new RuntimeException(); }
+			//if (isInit == false) { throw new RuntimeException(); }
 			primaryKey = nextPrimaryKey++;
 			if (nameGen == null) { nameGen = new Name(); }
 		}
@@ -81,6 +81,7 @@ public class Monster implements Comparable<Monster> {
 			// Infer what the next PrimaryKey should be.
 			if (primaryKey >= nextPrimaryKey) {
 				nextPrimaryKey = primaryKey + 1;
+				this.isInit = true;
 			} 
 			
 		}
@@ -199,7 +200,8 @@ public class Monster implements Comparable<Monster> {
 	 * @return A new 'starter' Monster.
 	 */
 	public static Monster generateRandom() {
-		Monster monster = new Monster();
+		
+		Monster monster = new Monster();		
 		java.util.Random rand = new java.util.Random();
 		
 		monster.setName();

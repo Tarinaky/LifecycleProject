@@ -35,7 +35,7 @@ public class Name {
 		maleNameList = new ArrayList<String>();
 		femaleNameList = new ArrayList<String>();
 			
-		Scanner in = new Scanner(this.getClass().getClassLoader().getResourceAsStream("data/names.csv") );
+		Scanner in = new Scanner(this.getClass().getClassLoader().getResourceAsStream("C:/Users/Ivan/Desktop/glassfish/data/names.csv") );
 		in.useDelimiter("[,\\s*]");
 		while (in.hasNext() ) {
 			try {
