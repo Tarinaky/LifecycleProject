@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uk.ac.aber.dcs.cs221.monstermash.data.DataSingleton;
 import uk.ac.aber.dcs.cs221.monstermash.data.TableOfAccounts;
@@ -15,13 +16,14 @@ public class LoginController extends HttpServlet{
 		
 	private static final long serialVersionUID = 1L;
 	private TableOfAccounts accountDb = DataSingleton.get();
-	public static UserAccount user = null;
+	//public static UserAccount user = null;
 	
 	protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String email = req.getParameter("userName");
 		String password = req.getParameter("password");
-		String url = "http://localhost:8080/Monster_Mash/Homepage";
+		req.setAttribute("email", email);
+		
 		
 		if (accountDb.lookup(email) == null) {
 			
@@ -49,13 +51,14 @@ public class LoginController extends HttpServlet{
 		} else {
 			
 			if(accountDb.lookup(email).checkPassword(password)){
-				user = accountDb.lookup(email);
-				resp.getWriter().println("<form action=\"Homepage\" method=\"get\">");
-				resp.getWriter().println("<h3>Redirect</h3>");
-				resp.getWriter().println("<input type=\"submit\" value=\"Redirect\">");
-				//resp.sendRedirect("http://localhost8080:/Monster_Mash/Homepage");
-			
+				
+				//user = accountDb.lookup(email);
+				HttpSession ses = req.getSession(true);
+				ses.putValue("email", email);
+				resp.sendRedirect("http://localhost:8080/Monster_Mash/Homepage");
+				
 			} else {
+				
 				resp.getWriter().println("<html>");
 				resp.getWriter().println("<head>");
 				resp.getWriter().println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">");
@@ -69,7 +72,7 @@ public class LoginController extends HttpServlet{
 				resp.getWriter().println("</ul>");
 				resp.getWriter().println("</div>");
 				resp.getWriter().println("<h3> Wrong Password </h3>");			
-				resp.getWriter().println("<form action=\"LoginController\" method=\"get\">");
+				resp.getWriter().println("<form action=\"LoginController\" method=\"post\">");
 				resp.getWriter().println("Email: <input type=\"text\" name=\"Email\"><br>");
 				resp.getWriter().println("Password: <input type=\"password\" name=\"password\"><br>");
 				resp.getWriter().println("<input type=\"submit\" value=\"Login\">");
@@ -77,7 +80,15 @@ public class LoginController extends HttpServlet{
 				resp.getWriter().println("</body>");
 				resp.getWriter().println("</html>");
 			}
+			
 		}		
+				
+	}
+	
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		doGet(req, resp);
 		
 	}
+	
+	 
 }
