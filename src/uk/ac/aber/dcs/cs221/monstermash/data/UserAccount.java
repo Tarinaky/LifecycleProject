@@ -1,34 +1,40 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
-/**
- * The data associated with a single user.
- * @author Jacob Smith, jas32
- *
- */
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.TreeSet;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * The data associated with a single user.
+ * @author Jacob Smith (jas32)
+ *
+ */
 public class UserAccount extends java.util.Observable {
 	private volatile long primaryKey;
-	private volatile String email;	
+	private volatile String email;
+	
 	private volatile String password;
-	private volatile TreeSet<Monster> monsters;	
+	private volatile TreeSet<Monster> monsters;
+	
 	private volatile List<UserAccount> friends;
 	private volatile List<Offer> offers;
+	
 	private volatile int cash=0;
 		
-	public long getUID() { return primaryKey; }
-	
 	/**
 	 * Compare a given string with the password on file.
 	 * @param password The string to check.
 	 * @return True iff this is the correct password for this user.
 	 */
+	
+	public long getUID() { return primaryKey; }
+	
 	public boolean checkPassword(String check){
 		String password = this.password;//Copy value to ensure value will not change due
 		//to interleaving.
@@ -37,7 +43,7 @@ public class UserAccount extends java.util.Observable {
 	}
 	
 	/**
-	 * Constructor
+	 * Ctor
 	 * @param primaryKey The primary key to permanently associate with this account.  
 	 */
 	public UserAccount(long primaryKey) {
@@ -97,7 +103,7 @@ public class UserAccount extends java.util.Observable {
 	}
 
 	/**
-	 * Deserialize the user from a JSON expression.
+	 * Deserialise the user from a JSON expression.
 	 * @param json A valid JSON object.
 	 * @throws JSONException
 	 */
@@ -208,3 +214,4 @@ public class UserAccount extends java.util.Observable {
 	}
 	
 }
+

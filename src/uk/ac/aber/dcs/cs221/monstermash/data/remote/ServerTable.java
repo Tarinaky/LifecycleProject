@@ -14,10 +14,6 @@ public class ServerTable {
 	
 	private volatile java.util.HashMap<String,Server> servers;
 	
-	public ServerTable() {
-		servers = new java.util.HashMap<String,Server>();
-	}
-	
 	public synchronized Server lookup(String name) {
 		return servers.get(name);
 	}

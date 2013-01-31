@@ -1,39 +1,52 @@
 package uk.ac.aber.dcs.cs221.monstermash.data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Observable;
+import java.util.Random;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+import uk.ac.aber.dcs.cs221.monstermash.util.Name;
+
 /**
- * Defines the attributes of a monster along with relevant functions to handle them.
+ * 
  * @author Jacob Smith, jas32
  *
  */
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
-import org.json.JSONException;
-import org.json.JSONObject;
-import uk.ac.aber.dcs.cs221.monstermash.util.Name;
-
 public class Monster implements Comparable<Monster> {
-	public static final int MAX_NUM_CHILDREN = 10;	
+	public static final int MAX_NUM_CHILDREN = 10;
+	
 	private static volatile long nextPrimaryKey = 1;
 	private static volatile boolean isInit = false;
-	private volatile long primaryKey;	
-	private volatile UserAccount owner;	
-	private volatile String name;	
+	
+	private volatile long primaryKey;
+	
+	private volatile UserAccount owner;
+	
+	private volatile String name;
+	
 	private volatile boolean forTupping = false;
 	private volatile boolean forSale = false;
 	private volatile boolean isDead = false;
-	protected volatile Date dateOfBirth;
+	
+	private volatile Date dateOfBirth;
+	
 	protected volatile double ageRate;
 	protected volatile int strengthCoefficient;
 	protected volatile int evadeCoefficient;
 	protected volatile int toughnessCoefficient;
+	
 	protected volatile double fertility;
+	
+	
 	protected volatile int injuryChance;
+	
 	protected static Name nameGen;
+	
 	private volatile int injuries;
-	private volatile int tuppingPrice = 0;
-	private volatile int salePrice = 0;
 	
 	public synchronized static void init(long nextPrimaryKey) {
 		Monster.nextPrimaryKey = nextPrimaryKey;
@@ -58,7 +71,7 @@ public class Monster implements Comparable<Monster> {
 		injuries = 0;
 	}
 	/**
-	 * Construct an uninitialised Monster with a particular primaryKey.
+	 * Construct an uninitialise Monster with a particular primaryKey.
 	 * @param primaryKey
 	 */
 	protected Monster(long primaryKey) {
@@ -111,8 +124,8 @@ public class Monster implements Comparable<Monster> {
 	
 	/**
 	 * Sets the monster's gender and immediately gives the monster a random
-	 * name.
-	 * @param gender The name of the monster (randomised to be a female or male name even though gender not implemented).
+	 * gender appropriate name. {@link #Gender}
+	 * @param gender The monster's gender.
 	 * @return This monster object.
 	 */
 	public synchronized Monster setName() {
@@ -203,7 +216,7 @@ public class Monster implements Comparable<Monster> {
 		
 		return monster;
 		
-}
+	}
 	
 	
 	/**
@@ -338,24 +351,6 @@ public class Monster implements Comparable<Monster> {
 	public synchronized boolean isForTupping(boolean b) {
 		return this.forTupping = b;
 	}
-	
-	public synchronized Monster setTuppingPrice(int i) {
-		this.tuppingPrice = i;
-		return this;
-	}
-	public synchronized int getTuppingPrice() {
-		return this.tuppingPrice;
-	}
-	
-	public synchronized Monster setSalePrice(int i) {
-		this.salePrice = i;
-		return this;
-	}
-	
-	public synchronized int getSalePrice() {
-		return this.salePrice;
-	}
-	
 	
 	public boolean isForSale() {
 		return this.forSale;

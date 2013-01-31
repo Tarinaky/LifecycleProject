@@ -28,7 +28,18 @@ public class Register extends HttpServlet{
 		String email = req.getParameter("userName");
 		String password = req.getParameter("password");
 		String repassword = req.getParameter("pasword");
-				
+		String jsValidation[] = {"function validate(form)",
+									"var email = document.forms[\"details\"][\"email\"].value;\"",
+									"var emailValue = document.forms[\"details\"][\"email\"].value;",
+									"if (!email.test(emailValue)) {",
+										"alert(\"Please entter a valid email adress\");",
+										"return false;",
+									"}",
+									"return true;",
+									"}"};
+									
+		
+		
 		if ( password.equals(repassword) ) {
 			
 			db.addUser(email).setPassword(repassword);
@@ -46,7 +57,9 @@ public class Register extends HttpServlet{
 			resp.getWriter().println("<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />");
 			resp.getWriter().println("<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\" />");
 			resp.getWriter().println("<title> Monster Mash </title>");
-			/*Javascript function here*/
+			for (int i = 0; i < jsValidation.length; i++) {
+				resp.getWriter().println(jsValidation[i]);
+			}
 			resp.getWriter().println("</head>");
 			resp.getWriter().println("<body>");
 			resp.getWriter().println("<div id=\"container\">");
