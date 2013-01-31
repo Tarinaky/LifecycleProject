@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 
 import uk.ac.aber.dcs.cs221.monstermash.data.DataSingleton;
+import uk.ac.aber.dcs.cs221.monstermash.data.Monster;
 import uk.ac.aber.dcs.cs221.monstermash.data.TableOfAccounts;
+import uk.ac.aber.dcs.cs221.monstermash.data.UserAccount;
 
 public class Register extends HttpServlet{
 	
@@ -28,46 +30,56 @@ public class Register extends HttpServlet{
 		String repassword = req.getParameter("pasword");
 				
 		if ( password.equals(repassword) ) {
-			resp.getWriter().println("If statement entered...");	
-			//db.addUser(email);
-			db.addUser(email).setPassword(repassword);
-			try {
-				db.buildJSON();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//db.addUser(email);
 			
-			resp.getWriter().println("<html>");
-			resp.getWriter().println("<head>");
-			resp.getWriter().println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">");
-			resp.getWriter().println("<title>MonsterMash</title>");
-			resp.getWriter().println("</head>");
-			resp.getWriter().println("<body>");
-			resp.getWriter().println("<h3> Successful Registration </h3>");
-			resp.getWriter().println("</body>");
-			resp.getWriter().println("</html>");
+			db.addUser(email).setPassword(repassword);
+			UserAccount user = db.lookup(email);
+			//Monster.generateRandom().setOwner(user);
 			
 			resp.sendRedirect("http://localhost:8080/Monster_Mash/login.jsp");
 						
 		} else {
 			
-			resp.getWriter().println("<html>");
+			resp.getWriter().println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
+			resp.getWriter().println("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+			resp.getWriter().println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
 			resp.getWriter().println("<head>");
-			resp.getWriter().println("<title>Insert title here</title>");
+			resp.getWriter().println("<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />");
+			resp.getWriter().println("<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\" />");
+			resp.getWriter().println("<title> Monster Mash </title>");
+			/*Javascript function here*/
 			resp.getWriter().println("</head>");
 			resp.getWriter().println("<body>");
-			resp.getWriter().println("<h3>Email or Password invalid</h3>");
-			resp.getWriter().println("<form action=\"Register\" method=\"get\">");
-			resp.getWriter().println("Name: <input type=\"text\" name=\"userName\"><br>");
-			resp.getWriter().println("Password: <input type=\"password\" name=\"password\"><br>");
-			resp.getWriter().println("Repassword: <input type=\"password\" name=\"password\"><br>");
-			resp.getWriter().println("<input type=\"submit\" value=\"Register\"");
+			resp.getWriter().println("<div id=\"container\">");
+			resp.getWriter().println("<div id=\"header\">");
+			resp.getWriter().println("<img src=\"header.png\" />");
+			resp.getWriter().println("<div id=\"navigation\">");
+			resp.getWriter().println("<ul>");
+			resp.getWriter().println("<li><a href=\"login.html\">Login</a></li>");
+			resp.getWriter().println("</ul>");
+			resp.getWriter().println("</div>");
+			resp.getWriter().println("</div>");
+			resp.getWriter().println("<div id=\"content\">");
+			resp.getWriter().println("<img class=\"page_header\" src=\"createaccount.png\" />");
+			resp.getWriter().println("<form id=\"details\" action =\"#\" method=\"post\" onsubmit=\"return validate(this)\">");
+			resp.getWriter().println("<p style=\"text-align:center;\">Email: <input type=\"text\" name=\"email\" size=\"20\" maxlength=\"60\" /> </p>");
+			resp.getWriter().println("<p style=\"text-align:center;\">Password: <input type=\"text\" name=\"pass\" size=\"20\" maxlength=\"60\" /> </p>");
+			resp.getWriter().println("<p style=\"text-align:center;\">Re-enter Password: <input type=\"text\" name=\"confirm\" size=\"20\" maxlength=\"60\" /> </p>");
+			resp.getWriter().println("<p style=\"text-align:center;\"><input style = \"text-align: center\" type=\"submit\" name=\"submit\" value=\"Submit\" /></p>");
 			resp.getWriter().println("</form>");
+			resp.getWriter().println("</div>");
+			resp.getWriter().println("<div id=\"footer\">");
+			resp.getWriter().println("<p>Monster Mash &copy; 2013 MonsterMash.com</p>");
+			resp.getWriter().println("</div>");
+			resp.getWriter().println("</div>");
 			resp.getWriter().println("</body>");
 			resp.getWriter().println("</html>");
 			
 		}
+		
 	}
+	
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+	
 }
