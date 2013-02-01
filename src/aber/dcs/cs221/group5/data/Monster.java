@@ -49,7 +49,7 @@ public class Monster implements Comparable<Monster> {
 	 */
 	public Monster() {
 		synchronized (getClass() ) {
-			if (isInit == false) { throw new RuntimeException(); }
+			//if (isInit == false) { throw new RuntimeException(); }
 			primaryKey = nextPrimaryKey++;
 			if (nameGen == null) { nameGen = new Name(); }
 		}

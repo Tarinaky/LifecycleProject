@@ -1,5 +1,6 @@
 package aber.dcs.cs221.group5.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,11 +41,11 @@ public class Name {
 		
 		//maleNameList.add("Brian");
 		//femaleNameList.add("Sheela");
-		URL url = this.getClass().getResource("/names.csv");
-		System.out.println("Trying to load names.csv from "+url.getPath());
+		
+		System.out.println("Trying to load names.csv from "+System.getProperty("user.home"));
 		Scanner in;
 		try {
-			in = new Scanner(url.openStream() );
+			in = new Scanner(new File(System.getProperty("user.home"),"names.csv"));
 			in.useDelimiter("[,\\s*]");
 			while (in.hasNext() ) {
 				try {

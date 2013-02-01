@@ -34,6 +34,7 @@ public class DataSingleton {
 			
 			//Try to load from file.
 			try {
+				System.out.println("Using persistance data from "+System.getProperty("user.home"));
 				BufferedReader in = new BufferedReader(new FileReader(
 						new File(System.getProperty("user.home"),dataPath)));
 				
@@ -68,9 +69,11 @@ public class DataSingleton {
 					DataSingleton.save();
 				}
 			};
-			timer.schedule(periodicSerialisation, serialisationPeriod);	
+			timer.schedule(periodicSerialisation, serialisationPeriod);
+			save();
 			
 		}
+		
 		return instance;
 	}
 	
@@ -78,6 +81,7 @@ public class DataSingleton {
 		TableOfAccounts t = get();
 		
 		try {
+			System.out.println("Trying to write here: "+System.getProperty("user.home"));
 			BufferedWriter out = new BufferedWriter(new FileWriter(
 					new File(System.getProperty("user.home"),dataPath)));
 			out.append(t.buildJSON().toString());
