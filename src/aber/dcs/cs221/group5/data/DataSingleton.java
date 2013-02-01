@@ -9,9 +9,13 @@ package aber.dcs.cs221.group5.data;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.TimerTask;
 import org.json.JSONException;
 
@@ -30,7 +34,8 @@ public class DataSingleton {
 			
 			//Try to load from file.
 			try {
-				BufferedReader in = new BufferedReader(new FileReader(dataPath));
+				BufferedReader in = new BufferedReader(new FileReader(
+						new File(System.getProperty("user.home"),dataPath)));
 				
 				StringBuilder sb = new StringBuilder();
 				while (in.ready()) {
@@ -73,7 +78,8 @@ public class DataSingleton {
 		TableOfAccounts t = get();
 		
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(dataPath));
+			BufferedWriter out = new BufferedWriter(new FileWriter(
+					new File(System.getProperty("user.home"),dataPath)));
 			out.append(t.buildJSON().toString());
 			out.close();
 		} catch (IOException e) {

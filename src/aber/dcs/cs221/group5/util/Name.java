@@ -1,7 +1,9 @@
 package aber.dcs.cs221.group5.util;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -30,37 +32,50 @@ public class Name {
 	 * Note! In order for this class to work properly the resource data/names.csv must be in the class path.
 	 * 
 	 * @return This name object.
+	 * @throws  
 	 */
 	public Name init() {
 		maleNameList = new ArrayList<String>();
 		femaleNameList = new ArrayList<String>();
 		
-		maleNameList.add("Brian");
-		femaleNameList.add("Sheela");
-		/*Scanner in = new Scanner(this.getClass().getClassLoader().getResourceAsStream("data/names.csv") );
-		in.useDelimiter("[,\\s*]");
-		while (in.hasNext() ) {
-			try {
-				String s = in.next();
-				if (!s.equals("") ) {
-					maleNameList.add(s);
-				}
-				in.next();
-				in.next();
+		//maleNameList.add("Brian");
+		//femaleNameList.add("Sheela");
+		URL url = this.getClass().getResource("/names.csv");
+		System.out.println("Trying to load names.csv from "+url.getPath());
+		Scanner in;
+		try {
+			in = new Scanner(url.openStream() );
+			in.useDelimiter("[,\\s*]");
+			while (in.hasNext() ) {
+				try {
+					String s = in.next();
+					if (!s.equals("") ) {
+						maleNameList.add(s);
+					}
+					in.next();
+					in.next();
+					
+					s = in.next();
+					if (!s.equals("") ) {
+						femaleNameList.add(s);
+					}
+					//in.next();
+					in.next();
+					in.next();
+					
+				} catch (NoSuchElementException e) {}
 				
-				s = in.next();
-				if (!s.equals("") ) {
-					femaleNameList.add(s);
-				}
-				//in.next();
-				in.next();
-				in.next();
-				
-			} catch (NoSuchElementException e) {}
-			
-		}
-		in.close();*/
+			}
+			in.close();
 
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.out.println("Cannot load names from file, using hardcodded values.");
+			maleNameList.add("Brian");
+			femaleNameList.add("Sheela");
+		}
+		
 		return this;
 	}
 	
