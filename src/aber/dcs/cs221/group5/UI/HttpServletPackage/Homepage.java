@@ -86,12 +86,13 @@ public class Homepage extends HttpServlet {
 		System.out.println(db.lookup(email).getMonsters() );
 		for (Monster monster: db.lookup(email).getMonsters() ) {
 			if(monster == null) continue;
+			
+			if (monster.getHealth() <=0) {
+				monster.reap();//The monster is dead, remove it.
+				continue;//Do not display this monster.
+			}
 			resp.getWriter().println("<td class = tr_home width =\"180px\";>");
 			
-			//-------------------gives me null-pointer exception here!!!--------------------------
-			if (monster == null) {
-				System.out.println("monster is null");
-			}
 			resp.getWriter().println("<h3>" + monster.getName() + "</h3>");
 			resp.getWriter().println("<p>Attributes</p>");
 			resp.getWriter().println("<p>Health " + monster.getHealth() + "</p>");
