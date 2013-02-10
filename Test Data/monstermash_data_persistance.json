@@ -13,12 +13,6 @@
             "password": "test3"
         },
         {
-            "email": "hello1.gmail.com",
-            "primaryKey": 1,
-            "cash": 0,
-            "password": "test1"
-        },
-        {
             "email": "wonkado27@live.co.uk",
             "primaryKey": 5,
             "cash": 0,
@@ -28,7 +22,107 @@
             "email": "james23@hotmail.com",
             "primaryKey": 2,
             "cash": 0,
+            "monsters": [
+                {
+                    "dateOfBirth": 1359712519625,
+                    "evade": 241,
+                    "injuries": 0,
+                    "forSale": false,
+                    "strength": 252,
+                    "ageRate": 8.430107625396778E-7,
+                    "primaryKey": 4,
+                    "name": "Ali",
+                    "owner": 2,
+                    "fertility": 0.9677158885000995,
+                    "toughness": 225,
+                    "forTupping": false,
+                    "injuryChance": 107
+                },
+                {
+                    "dateOfBirth": 1359712519625,
+                    "evade": 279,
+                    "injuries": 0,
+                    "forSale": false,
+                    "strength": 247,
+                    "ageRate": 5.505376408422387E-7,
+                    "primaryKey": 5,
+                    "name": "Alea",
+                    "owner": 2,
+                    "fertility": 0.6917029351563119,
+                    "toughness": 204,
+                    "forTupping": false,
+                    "injuryChance": 111
+                },
+                {
+                    "dateOfBirth": 1359712519625,
+                    "evade": 268,
+                    "injuries": 0,
+                    "forSale": false,
+                    "strength": 268,
+                    "ageRate": 8.946236663686376E-7,
+                    "primaryKey": 6,
+                    "name": "Aleshia",
+                    "owner": 2,
+                    "fertility": 0.29427011375236745,
+                    "toughness": 263,
+                    "forTupping": false,
+                    "injuryChance": 107
+                }
+            ],
             "password": "test2"
+        },
+        {
+            "email": "hello1@gmail.com",
+            "primaryKey": 1,
+            "cash": 0,
+            "monsters": [
+                {
+                    "dateOfBirth": 1359712519625,
+                    "evade": 252,
+                    "injuries": 0,
+                    "forSale": false,
+                    "strength": 258,
+                    "ageRate": 7.74193557434398E-7,
+                    "primaryKey": 1,
+                    "name": "Aayat",
+                    "owner": 1,
+                    "fertility": 0.25153144350192225,
+                    "toughness": 295,
+                    "forTupping": false,
+                    "injuryChance": 86
+                },
+                {
+                    "dateOfBirth": 1359712519625,
+                    "evade": 263,
+                    "injuries": 0,
+                    "forSale": false,
+                    "strength": 258,
+                    "ageRate": 6.193548459475184E-7,
+                    "primaryKey": 2,
+                    "name": "Arafat",
+                    "owner": 1,
+                    "fertility": 0.6367719223433046,
+                    "toughness": 247,
+                    "forTupping": false,
+                    "injuryChance": 103
+                },
+                {
+                    "dateOfBirth": 1359712519625,
+                    "evade": 236,
+                    "injuries": 0,
+                    "forSale": false,
+                    "strength": 284,
+                    "ageRate": 8.774193650923177E-7,
+                    "primaryKey": 3,
+                    "name": "Arryn",
+                    "owner": 1,
+                    "fertility": 0.8940011428362205,
+                    "toughness": 258,
+                    "forTupping": false,
+                    "injuryChance": 96
+                }
+            ],
+            "password": "test1"
         }
     ],
     "nextAccountKey": 6

@@ -14,18 +14,44 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
  
  <servlet>   
    <servlet-name>LoginController</servlet-name>
-   <servlet-class>uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage.LoginController</servlet-class>   
+   <servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.LoginController</servlet-class>   
  </servlet>
  
  <servlet>
  	<servlet-name>Register</servlet-name>
- 	<servlet-class>uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage.Register</servlet-class>
+ 	<servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.Register</servlet-class>
  </servlet>
  
  <servlet>
  	<servlet-name>Homepage</servlet-name>
- 	<servlet-class>uk.ac.aber.dcs.cs221.monstermash.UI.HttpServletPackage.Homepage</servlet-class>
+ 	<servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.Homepage</servlet-class>
  </servlet>
+ 
+ <servlet>
+ 	<servlet-name>FriendPage</servlet-name>
+ 	<servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.FriendPage</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<servlet-name>FriendRequests</servlet-name>
+ 	<servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.FriendRequests</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<servlet-name>BreedOptions</servlet-name>
+ 	<servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.BreedOptions</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<servlet-name>SellingOptions</servlet-name>
+ 	<servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.SellingOptions</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<servlet-name>BattleRequest</servlet-name>
+ 	<servlet-class>aber.dcs.cs221.group5.UI.HttpServletPackage.BattleRequest</servlet-class>
+ </servlet>
+ 
  <servlet-mapping>
    <servlet-name>LoginController</servlet-name>
    <url-pattern>/LoginController</url-pattern>
@@ -41,7 +67,30 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
  	<url-pattern>/Homepage</url-pattern>	
  </servlet-mapping>
  
+ <servlet-mapping>
+ 	<servlet-name>FriendPage</servlet-name>
+ 	<url-pattern>/FriendPage</url-pattern>
+ </servlet-mapping>
  
+ <servlet-mapping>
+ 	<servlet-name>FriendRequests</servlet-name>
+ 	<url-pattern>/FriendRequests</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>BreedOptions</servlet-name>
+ 	<url-pattern>/BreedOptions</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>SellingOptions</servlet-name>
+ 	<url-pattern>/SellingOptions</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>BattleRequest</servlet-name>
+ 	<url-pattern>/BattleRequest</url-pattern>
+ </servlet-mapping>
 
  
 
